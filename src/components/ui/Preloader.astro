@@ -93,4 +93,27 @@
     max-height: 50px; /* mobile cap */
   }
 }
+
+.preloader-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 100%;
+}
+
+.preloader-logo img {
+  width: auto;
+  height: auto;
+  max-height: 70px;
+  max-width: 90vw; /* fits screen width nicely */
+  object-fit: contain;
+}
+
+@media (max-width: 768px) {
+  .preloader-logo img {
+    max-height: 50px;
+    max-width: 80vw;
+  }
+}
 </style>
