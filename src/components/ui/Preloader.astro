@@ -1,7 +1,7 @@
 <div id="preloader" class="preloader js-siteloader">
   <div class="preloader-wrapper">
     <div class="preloader-logo fadeInUpBig">
-      <img src="/images/logo-reflejo.png" alt="" width="auto" height="50" />
+      <img src="/images/logo-reflejo.png" alt="Reflejo logo" class="preloader-logo-img" />
     </div>
     <div class="preloader-text fadeInUpBig">
       <span class="percentage loading-num">0</span>%
@@ -79,3 +79,29 @@
   </ul>
 </div>
 
+
+
+<style>
+  .preloader-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+
+  .preloader-logo-img {
+    display: block;
+    width: auto;
+    height: auto;
+    max-width: 90vw;
+    max-height: min(120px, 20vh);
+    object-fit: contain;
+  }
+
+  @media (max-width: 768px) {
+    .preloader-logo-img {
+      max-height: min(80px, 15vh);
+      max-width: 80vw;
+    }
+  }
+</style>
