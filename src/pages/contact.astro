@@ -1,0 +1,253 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { joinUsTDK } from "../config/seoTdk";
+---
+
+<Layout
+  title={joinUsTDK.title || ""}
+  description={joinUsTDK.description || ""}
+  keywords={joinUsTDK.keywords || ""}
+>
+  <div class="page-joinus no-scroll">
+    <div class="page-content">
+      <!-- joinus us -->
+      <section class="joinus animate-section">
+        <div class="container joinus-container">
+          <div class="section-body">
+            <div class="joinus-inner">
+              <div class="c-text">
+                <div
+                  class="c-text-inner col-12 col-sm-10 col-md-8 col-lg-8 m-auto"
+                >
+                  <div class="c-text__content col-12 p-0 joinus-main">
+                    <h3
+                      class="title m joinus-title-top text-center animate-item col-12 col-xl-9 m-auto"
+                    >
+                      From concept to 
+                      camera - we bring visions to life
+                      
+                    </h3>
+                    <div class="joinus-hero col-10 col-lg-6 animate-item">
+                      <img
+                        src="/images/joinus/joinus-hero.jpg"
+                        alt=""
+                        class="joinus-hero__img"
+                      />
+                    </div>
+
+                    <h3
+                      class="title m joinus-title-bottom text-center animate-item col-12 col-xl-9 m-auto"
+                    >
+                      Start your creative journey with us today.
+                      
+                    </h3>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- joinus us -->
+      <section class="p-joinus animate-section">
+        <div class="container">
+          <div class="p-joinus-wrapper p-joinus-bg animate-item">
+            <div class="p-joinus-box">
+              <div class="p-joinus__title animate-item">
+                For details, pricing, or questions, please DM us through the
+                platforms below.
+              </div>
+              <div class="p-joinus__social border-top animate-item">
+                <div class="p-joinus__social__list">
+                  <a href="###" class="p-joinus__social__item">
+                    <img
+                      src="/images/social/facebook.svg"
+                      alt=""
+                      class="p-joinus__social__logo"
+                    />
+                  </a>
+                  <a href="###" class="p-joinus__social__item">
+                    <img
+                      src="/images/social/ins.svg"
+                      alt=""
+                      class="p-joinus__social__logo"
+                    />
+                  </a>
+                  <a href="###" class="p-joinus__social__item">
+                    <img
+                      src="/images/social/pin.svg"
+                      alt=""
+                      class="p-joinus__social__logo"
+                    />
+                  </a>
+                  <a href="###" class="p-joinus__social__item">
+                    <img
+                      src="/images/social/tiktok.svg"
+                      alt=""
+                      class="p-joinus__social__logo"
+                    />
+                  </a>
+                  <a href="###" class="p-joinus__social__item">
+                    <img
+                      src="/images/social/xiaohongshu.svg"
+                      alt=""
+                      class="p-joinus__social__logo"
+                    />
+                  </a>
+                  <a href="###" class="p-joinus__social__item">
+                    <img
+                      src="/images/social/mail.svg"
+                      alt=""
+                      class="p-joinus__social__logo"
+                    />
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- scroll-text -->
+      <section class="scroll-text animate-section">
+        <div class="string-scroll animate-item">
+          <div class="string-scroll__text">
+            JOIN US NOW • promote individuals to bring out the best in people •
+            JOIN US NOW • promote individuals to bring out the best in people •
+            JOIN US NOW • promote individuals to bring out the best in people •
+            JOIN US NOW • promote individuals to bring out the best in people •
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</Layout>
+
+<style lang="scss">
+  .page-content {
+    .c-text__content .title {
+      @media (max-width: 1500px) {
+        font-size: 44px;
+      }
+      @media (max-width: 1360px) {
+        font-size: 40px;
+      }
+
+      @media (max-width: 1024px) {
+        font-size: 32px;
+      }
+      @media (max-width: 576px) {
+        font-size: 28px;
+      }
+    }
+  }
+  .p-joinus {
+    position: relative;
+    &-box {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      background: rgba(255, 255, 255, 0.8);
+      max-width: 400px;
+      width: 90%;
+      margin: 16vh auto 200px;
+      padding: 40px 40px;
+      @media (max-width: 576px) {
+        padding: 40px 20px;
+      }
+    }
+    &__title {
+      margin-top: 20px;
+      margin-bottom: 30px;
+      font-size: 1.75rem;
+      line-height: 1.2;
+      text-align: center;
+    }
+    &__action {
+      margin: 60px auto;
+      text-align: center;
+      width: 100%;
+      .btn {
+        width: 100%;
+        max-width:220px;
+      }
+    }
+    &__social {
+      margin: 10px auto 0;
+      &__item {
+        padding: 0.5rem 0;
+      }
+      &__list {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        align-items: center;
+        gap: 0 var(--gap);
+        margin-top: var(--margin);
+      }
+      &__logo {
+        width: 32px;
+        height: auto;
+        cursor: pointer;
+        &:hover {
+          opacity: 0.75;
+        }
+      }
+    }
+  }
+  .p-joinus-bg {
+    background: url(/images/joinus/joinus.jpg) no-repeat center center;
+    min-height: 100vh;
+    width: 100%;
+    position: relative;
+  }
+  .joinus-title-top {
+    position: relative;
+    z-index: 2;
+  }
+  .joinus-title-bottom {
+    margin-top: -5vh;
+    z-index: 0;
+  }
+  .joinus-main {
+    position: relative;
+  }
+  .joinus-hero {
+    position: relative;
+    margin: -10px auto 20px;
+
+    z-index: 1;
+  }
+  .joinus-hero__img {
+    transform: rotate(-3deg);
+  }
+</style>
+
+<script>
+  import { gsap } from "gsap";
+  document.addEventListener("astro:page-load", () => {
+    if (document.querySelector(".p-joinus")) {
+      gsap.to(".joinus .animate-item", {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        stagger: 0.35,
+        delay: 0.5,
+        ease: "Power1.out",
+      });
+      gsap.to(".p-joinus .animate-item", {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        stagger: 0.35,
+        ease: "Power1.out",
+        scrollTrigger: {
+          trigger: ".p-joinus",
+          start: "top 80%",
+        },
+      });
+    }
+  });
+</script>

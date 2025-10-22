@@ -1,0 +1,481 @@
+{
+  "models": [
+    {
+      "id": "001",
+      "name": "Weddings & Engagements",
+      "image": "/images/models/001-alina-rai/cover.jpg",
+      "date": "2024/05",
+      "category": "events",
+      "featured": true,
+      "measurements": {
+        "height": "178",
+        "bust": "78",
+        "waist": "61",
+        "hips": "87",
+        "shoes": "37",
+        "cup": "B"
+      },
+      "info": {
+        "from": "Baku, Azerbaijan",
+        "photographer": "Şükür Azimoviç",
+        "languages": ["English", "Russian", "Turkish"],
+        "available": true
+      },
+      "gallery": [
+        "/images/models/001-alina-rai/01.jpg",
+        "/images/models/001-alina-rai/02.jpg",
+        "/images/models/001-alina-rai/03.jpg",
+        "/images/models/001-alina-rai/04.jpg",
+        "/images/models/001-alina-rai/05.jpg",
+        "/images/models/001-alina-rai/06.jpg",
+        "/images/models/001-alina-rai/07.jpg",
+        "/images/models/001-alina-rai/08.jpg",
+        "/images/models/001-alina-rai/09.jpg",
+        "/images/models/001-alina-rai/10.jpg"
+      ]
+    },
+    {
+      "id": "002",
+      "name": "Events & Conferences",
+      "image": "/images/models/002-david-miller/cover.jpg",
+      "date": "2024/04",
+      "category": "events",
+      "featured": false,
+      "measurements": {
+        "height": "188",
+        "chest": "98",
+        "waist": "76",
+        "shoes": "43"
+      },
+      "info": {
+        "from": "London, UK",
+        "photographer": "John Smith",
+        "languages": ["English", "French"],
+        "available": true
+      },
+      "gallery": ["/images/models/002-david-miller/01.jpg"]
+    },
+    {
+      "id": "003",
+      "name": "Concerts & Live Shows",
+      "image": "/images/models/003-sophia-chen/cover.jpg",
+      "date": "2024/05",
+      "category": "events",
+      "featured": true,
+      "measurements": {
+        "height": "175",
+        "bust": "82",
+        "waist": "60",
+        "hips": "88",
+        "shoes": "38",
+        "cup": "C"
+      },
+      "info": {
+        "from": "Shanghai, China",
+        "photographer": "Wei Zhang",
+        "languages": ["Chinese", "English"],
+        "available": true
+      },
+      "gallery": ["/images/models/003-sophia-chen/01.jpg"]
+    },
+    {
+      "id": "004",
+      "name": "Community Events",
+      "image": "/images/models/004-elena-ivanova/cover.jpg",
+      "date": "2024/03",
+      "category": "events",
+      "featured": false,
+      "measurements": {
+        "height": "180",
+        "bust": "84",
+        "waist": "62",
+        "hips": "90",
+        "shoes": "39",
+        "cup": "C"
+      },
+      "info": {
+        "from": "Moscow, Russia",
+        "photographer": "Alexei Petrov",
+        "languages": ["Russian", "English"],
+        "available": true
+      },
+      "gallery": ["/images/models/004-elena-ivanova/01.jpg"]
+    },
+    {
+      "id": "005",
+      "name": "Couple Sessions",
+      "image": "/images/models/005-james-wilson/cover.jpg",
+      "date": "2024/04",
+      "category": "portraits",
+      "featured": true,
+      "measurements": {
+        "height": "190",
+        "chest": "100",
+        "waist": "80",
+        "shoes": "44"
+      },
+      "info": {
+        "from": "New York, USA",
+        "photographer": "Sarah Johnson",
+        "languages": ["English"],
+        "available": true
+      },
+      "gallery": ["/images/models/005-james-wilson/01.jpg"]
+    },
+    {
+      "id": "006",
+      "name": "Family Portraits",
+      "image": "/images/models/006-maria-santos/cover.jpg",
+      "date": "2024/05",
+      "category": "portraits",
+      "featured": false,
+      "measurements": {
+        "height": "176",
+        "bust": "80",
+        "waist": "59",
+        "hips": "86",
+        "shoes": "37",
+        "cup": "B"
+      },
+      "info": {
+        "from": "Rio de Janeiro, Brazil",
+        "photographer": "Carlos Oliveira",
+        "languages": ["Portuguese", "English", "Spanish"],
+        "available": true
+      },
+      "gallery": ["/images/models/006-maria-santos/01.jpg"]
+    },
+    {
+      "id": "007",
+      "name": "Real Estate",
+      "image": "/images/models/007-naomi-johnson/cover.jpg",
+      "date": "2024/02",
+      "category": "commercial",
+      "featured": true,
+      "measurements": {
+        "height": "179",
+        "bust": "81",
+        "waist": "60",
+        "hips": "89",
+        "shoes": "38",
+        "cup": "B"
+      },
+      "info": {
+        "from": "Lagos, Nigeria",
+        "photographer": "Emmanuel Osei",
+        "languages": ["English", "Yoruba"],
+        "available": false
+      },
+      "gallery": ["/images/models/007-naomi-johnson/01.jpg"]
+    },
+    {
+      "id": "008",
+      "name": "Headshots",
+      "image": "/images/models/008-headshots/cover.jpg",
+      "date": "2024/03",
+      "category": "portraits",
+      "featured": false,
+      "measurements": {
+        "height": "182",
+        "chest": "95",
+        "waist": "74",
+        "shoes": "42"
+      },
+      "info": {
+        "from": "Tokyo, Japan",
+        "photographer": "Yuki Sato",
+        "languages": ["Japanese", "English"],
+        "available": true
+      },
+      "gallery": [
+        "/images/models/008-headshots/01.jpg",
+        "/images/models/008-headshots/02.jpg",
+        "/images/models/008-headshots/03.jpg",
+        "/images/models/008-headshots/04.jpg",
+        "/images/models/008-headshots/05.jpg"
+      ]
+    },
+    {
+      "id": "009",
+      "name": "Personal Branding",
+      "image": "/images/models/009-isabelle-dubois/cover.jpg",
+      "date": "2024/04",
+      "category": "commercial",
+      "featured": false,
+      "measurements": {
+        "height": "177",
+        "bust": "83",
+        "waist": "61",
+        "hips": "88",
+        "shoes": "38",
+        "cup": "C"
+      },
+      "info": {
+        "from": "Paris, France",
+        "photographer": "Pierre Leclerc",
+        "languages": ["French", "English"],
+        "available": true
+      },
+      "gallery": ["/images/models/009-isabelle-dubois/01.jpg"]
+    },
+    {
+      "id": "010",
+      "name": "Lifestyle",
+      "image": "/images/models/010-aisha-khan/cover.jpg",
+      "date": "2024/05",
+      "category": "commercial",
+      "featured": true,
+      "measurements": {
+        "height": "173",
+        "bust": "79",
+        "waist": "58",
+        "hips": "85",
+        "shoes": "36",
+        "cup": "B"
+      },
+      "info": {
+        "from": "Dubai, UAE",
+        "photographer": "Hassan Al-Farsi",
+        "languages": ["Arabic", "English"],
+        "available": true
+      },
+      "gallery": ["/images/models/010-aisha-khan/01.jpg"]
+    },
+    {
+      "id": "011",
+      "name": "Product Photography",
+      "image": "/images/models/011-product-photo/cover.jpg",
+      "date": "2024/02",
+      "category": "commercial",
+      "featured": false,
+      "measurements": {
+        "height": "185",
+        "chest": "97",
+        "waist": "78",
+        "shoes": "43"
+      },
+      "info": {
+        "from": "Madrid, Spain",
+        "photographer": "Ana Jimenez",
+        "languages": ["Spanish", "English"],
+        "available": true
+      },
+      "gallery": [
+        "/images/models/011-product-photo/01.jpg",
+        "/images/models/011-product-photo/02.jpg",
+        "/images/models/011-product-photo/03.jpg",
+        "/images/models/011-product-photo/04.jpg",
+        "/images/models/011-product-photo/05.jpg"
+      ]
+    },
+    {
+      "id": "012",
+      "name": "Magazine-Style Shoots",
+      "image": "/images/models/012-emma-watson/cover.jpg",
+      "date": "2024/03",
+      "category": "editorial",
+      "featured": true,
+      "measurements": {
+        "height": "174",
+        "bust": "80",
+        "waist": "60",
+        "hips": "86",
+        "shoes": "37",
+        "cup": "B"
+      },
+      "info": {
+        "from": "Sydney, Australia",
+        "photographer": "Michael Thompson",
+        "languages": ["English"],
+        "available": true
+      },
+      "gallery": ["/images/models/012-emma-watson/01.jpg"]
+    },
+    {
+      "id": "013",
+      "name": "Conceptual",
+      "image": "/images/models/013-yuna-kim/cover.jpg",
+      "date": "2024/04",
+      "category": "editorial",
+      "featured": false,
+      "measurements": {
+        "height": "172",
+        "bust": "78",
+        "waist": "57",
+        "hips": "84",
+        "shoes": "36",
+        "cup": "A"
+      },
+      "info": {
+        "from": "Seoul, South Korea",
+        "photographer": "Ji-hoon Park",
+        "languages": ["Korean", "English"],
+        "available": true
+      },
+      "gallery": ["/images/models/013-yuna-kim/01.jpg"]
+    },
+    {
+      "id": "014",
+      "name": "Fashion Photography",
+      "image": "/images/models/014-olivia-martinez/cover.jpg",
+      "date": "2024/05",
+      "category": "editorial",
+      "featured": true,
+      "measurements": {
+        "height": "176",
+        "bust": "82",
+        "waist": "61",
+        "hips": "88",
+        "shoes": "38",
+        "cup": "C"
+      },
+      "info": {
+        "from": "Mexico City, Mexico",
+        "photographer": "Alejandro Vega",
+        "languages": ["Spanish", "English"],
+        "available": true
+      },
+      "gallery": ["/images/models/014-olivia-martinez/01.jpg"]
+    },
+    {
+      "id": "015",
+      "name": "BTS",
+      "image": "/images/models/015-alexander-schmidt/cover.jpg",
+      "date": "2024/03",
+      "category": "editorial",
+      "featured": true,
+      "measurements": {
+        "height": "189",
+        "chest": "99",
+        "waist": "79",
+        "shoes": "44"
+      },
+      "info": {
+        "from": "Berlin, Germany",
+        "photographer": "Hannah Weber",
+        "languages": ["German", "English"],
+        "available": true
+      },
+      "gallery": ["/images/models/015-alexander-schmidt/01.jpg"]
+    },
+    {
+      "id": "016",
+      "name": "Social Media Packages",
+      "image": "/images/models/016-amara-okafor/cover.jpg",
+      "date": "2024/04",
+      "category": "editorial",
+      "featured": false,
+      "measurements": {
+        "height": "180",
+        "bust": "81",
+        "waist": "60",
+        "hips": "89",
+        "shoes": "39",
+        "cup": "B"
+      },
+      "info": {
+        "from": "Accra, Ghana",
+        "photographer": "Kwame Mensah",
+        "languages": ["English", "Twi"],
+        "available": true
+      },
+      "gallery": [
+        "/images/models/016-amara-okafor/01.jpg",
+        "/images/models/016-amara-okafor/02.jpg",
+        "/images/models/016-amara-okafor/03.jpg"
+      ]
+    },
+    {
+      "id": "017",
+      "name": "Modeling Portfolio",
+      "image": "/images/models/017-victoria-popova/cover.jpg",
+      "date": "2024/02",
+      "category": "editorial",
+      "featured": true,
+      "measurements": {
+        "height": "178",
+        "bust": "83",
+        "waist": "62",
+        "hips": "90",
+        "shoes": "38",
+        "cup": "C"
+      },
+      "info": {
+        "from": "Kiev, Ukraine",
+        "photographer": "Dmitri Sokolov",
+        "languages": ["Ukrainian", "Russian", "English"],
+        "available": false
+      },
+      "gallery": ["/images/models/017-victoria-popova/01.jpg"]
+    },
+    {
+      "id": "018",
+      "name": "Styling",
+      "image": "/images/models/018-lucia-ferrari/cover.jpg",
+      "date": "2024/05",
+      "category": "editorial",
+      "featured": false,
+      "measurements": {
+        "height": "175",
+        "bust": "80",
+        "waist": "59",
+        "hips": "87",
+        "shoes": "37",
+        "cup": "B"
+      },
+      "info": {
+        "from": "Milan, Italy",
+        "photographer": "Marco Rossi",
+        "languages": ["Italian", "English"],
+        "available": true
+      },
+      "gallery": ["/images/models/018-lucia-ferrari/01.jpg"]
+    },
+    {
+      "id": "019",
+      "name": "Editorial",
+      "image": "/images/models/019-jasmine-patel/cover.jpg",
+      "date": "2024/03",
+      "category": "editorial",
+      "featured": true,
+      "measurements": {
+        "height": "174",
+        "bust": "79",
+        "waist": "58",
+        "hips": "86",
+        "shoes": "37",
+        "cup": "B"
+      },
+      "info": {
+        "from": "Mumbai, India",
+        "photographer": "Raj Sharma",
+        "languages": ["Hindi", "English"],
+        "available": true
+      },
+      "gallery": ["/images/models/019-jasmine-patel/01.jpg"]
+    },
+    {
+      "id": "020",
+      "name": "Editorial",
+      "image": "/images/models/020-gabriela-mendoza/cover.jpg",
+      "date": "2024/04",
+      "category": "editorial",
+      "featured": false,
+      "measurements": {
+        "height": "177",
+        "bust": "82",
+        "waist": "61",
+        "hips": "88",
+        "shoes": "38",
+        "cup": "C"
+      },
+      "info": {
+        "from": "Buenos Aires, Argentina",
+        "photographer": "Diego Fernandez",
+        "languages": ["Spanish", "English", "Portuguese"],
+        "available": true
+      },
+      "gallery": ["/images/models/020-gabriela-mendoza/01.jpg"]
+    }
+  ]
+}

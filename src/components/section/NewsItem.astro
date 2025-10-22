@@ -1,0 +1,146 @@
+---
+import type { CollectionEntry } from "astro:content";
+interface Props {
+  post: CollectionEntry<"blog">;
+}
+const { data, slug } = Astro.props.post;
+---
+
+<div class="news-item col-12 col-sm-12 col-md-6 animate-item" data-gsap-item>
+  <div class="news-figure col-12 col-sm-12 col-lg-5">
+    <a href={`/blog/${slug}`} class="news-figure__inner">
+      <img
+        src={data.cover}
+        alt={data.coverAlt}
+        class="news-figure__img abs full cover"
+      />
+    </a>
+  </div>
+  <div class="news-content col-12 col-sm-12 col-lg-6 p-0">
+    <div class="news-content__inner">
+      <div class="news-date xs">
+        ({data.publishDate.toISOString().slice(0, 10).replace(/-/g, "/")})
+      </div>
+      <h2 class="news-title m">
+        {data.title}
+      </h2>
+      <a href={`/blog/${slug}`} class="news-link c-text__link cta link-solid s">
+        <img
+          src="/images/icon/arrow.svg"
+          alt=""
+          class="icon--s icon--left c-text__link--arrow"
+        />
+        <span>Read More</span>
+      </a>
+    </div>
+  </div>
+  <a href={`/blog/${slug}`} class="item-link"></a>
+</div>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+  gsap.registerPlugin(ScrollTrigger);
+
+  document.addEventListener("astro:page-load", () => {
+    const newsItems = document.querySelectorAll("[data-gsap-item]");
+
+    ScrollTrigger.batch(newsItems, {
+      start: "top 85%",
+      onEnter: (batch) => {
+        batch.forEach((item, index) => {
+          gsap.fromTo(
+            item,
+            { y: 60, opacity: 0 },
+            {
+              y: 0,
+              opacity: 1,
+              duration: 1,
+              ease: "power2.out",
+              delay: index * 0.35,
+            }
+          );
+        });
+      },
+    });
+  });
+</script>
+<style lang="scss">
+  .news-description {
+    margin: 1rem 0;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    opacity: 0.8;
+  }
+  .news {
+    &-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      will-change: transform;
+      flex-wrap: wrap;
+      margin-bottom: 80px;
+    }
+    &-figure {
+      --ratio: 50%;
+      padding-top: var(--ratio);
+      position: relative;
+      background-color: #eaeaea;
+      will-change: transform;
+      transform: translate3d(0, 0, 0);
+      @media (max-width: 1023px) {
+        --ratio: 75%;
+      }
+      @media (max-width: 991px) {
+        --ratio: 66.6666%;
+      }
+      @media (max-width: 767px) {
+        --ratio: 100%;
+      }
+      &__inner {
+        position: absolute;
+        top: -1px;
+        left: -1px;
+        width: calc(100% + 2px);
+        height: calc(100% + 2px);
+        overflow: hidden;
+        will-change: transform;
+        transform: translate3d(0, 0, 0);
+      }
+    }
+    &-content {
+      @media (max-width: 991px) {
+        margin: 40px 0 20px;
+      }
+      @media (max-width: 576px) {
+        margin: 20px 0 20px;
+      }
+
+      &__inner {
+        .news-title {
+          margin: 40px 0;
+          text-transform: none;
+          max-width: 80%;
+          line-height: 1.08;
+
+          @media (max-width: 576px) {
+            max-width: 100%;
+            margin: 16px 0 32px;
+          }
+        }
+        .news-link {
+          position: relative;
+        }
+      }
+    }
+    &-date {
+      color: var(--color-200);
+    }
+    &-title {
+      @media (max-width: 576px) {
+        font-size: 6.5vw;
+        line-height: 1.333;
+      }
+    }
+  }
+</style>

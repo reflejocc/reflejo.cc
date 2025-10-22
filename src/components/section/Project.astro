@@ -1,0 +1,214 @@
+<!-- project -->
+<section class="project">
+  <div class="container project-container">
+    <div class="section-header link inactive-prev">
+      <h2 class="section-header__title splitting-heading xl">Project</h2>
+      <div class="section-header__link">
+        <a
+          href="/themes/in-the-rye"
+          class="link btn btn--outline--rounded-full"
+        >
+          <div class="link__value">VIEW MORE</div>
+          <img
+            src="/images/icon/arrow.svg"
+            alt=""
+            class="link__icon icon--s link__icon--right"
+          />
+        </a>
+      </div>
+      <div class="section-header__line line-extend"></div>
+    </div>
+    <div class="section-body gsap-projectTrigger">
+      <div class="project-inner">
+        <div class="project-figure">
+          <video
+            preload=""
+            playsinline
+            controls
+            draggable="false"
+            id="home-video"
+            muted="true"
+            class="home-video project-figure__video nodrag"
+            loop
+            poster="/images/video.jpg"
+          >
+            <source src="/images/video.mp4" type="video/webm" />
+            <source src="/images/video.mp4" type="video/mp4" />
+            <p>Your browser does not support the video tag.</p>
+          </video>
+        </div>
+        <div class="project-info p-0 col-12 col-md-10 col-xl-6 ml-auto">
+          <div class="project-info__title xs">IN THE RYE</div>
+          <div class="project-info__date xs">@cottonbro</div>
+          <div class="project-info__cta xs">
+            <a href="/themes/in-the-rye" class="c-text__link cta link-solid">
+              <img
+                src="/images/icon/arrow.svg"
+                alt=""
+                class="icon--s icon--left c-text__link--arrow"
+              />
+              View ALL
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style lang="scss">
+  .project {
+    &-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 3rem auto 1.5rem;
+    }
+    &-body {
+      &__img {
+        object-fit: cover;
+      }
+    }
+    &-inner {
+      position: relative;
+    }
+    &-figure {
+      overflow: hidden;
+      font-size: 0;
+      &__video {
+        position: relative;
+        object-fit: cover;
+        height: 100%;
+        width: 100%;
+        transition: all 0.35s ease-in-out;
+        @media (max-width: 767px) {
+          aspect-ratio: 4/3;
+        }
+      }
+      &:hover &__img {
+      }
+      &__img {
+        position: relative;
+        object-fit: cover;
+        height: 100%;
+        width: 100%;
+        transition: all 0.35s ease-in-out;
+      }
+    }
+    &-info {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      background-color: #fff;
+      margin-top: var(--gap);
+      margin-bottom: 0;
+      float: right;
+      box-sizing: border-box;
+      font-size: var(--text);
+      line-height: 1.2;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      text-transform: uppercase;
+      padding: calc(var(--gap) * 1.5) var(--gap) !important;
+      @media (max-width: 767px) {
+        position: relative;
+        margin: 20px auto 120px;
+        padding: 0 !important;
+      }
+      &-date {
+        font-size: 1.125rem;
+      }
+      &__title {
+        font-size: 1.125rem;
+      }
+      &__cta {
+        a span {
+          font-size: 1.125rem;
+        }
+      }
+      &__contact {
+        margin-top: var(--gap);
+      }
+    }
+
+    &-list {
+      /* gap: var(--gutter); */
+    }
+  }
+</style>
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  document.addEventListener("astro:page-load", () => {
+    if (document.querySelector("#home-video")) {
+      const video = document.getElementById("home-video") as HTMLVideoElement;
+      if (video) {
+        var playPromise = video.play();
+        if (playPromise !== undefined) {
+          playPromise
+            .then((_) => {
+              video.controls = false;
+              video.pause();
+            })
+            .catch((error) => {
+              console.warn("Error playing video:", error);
+            });
+        }
+      } else {
+        console.warn("Video element with id 'home-video' not found.");
+      }
+  }
+
+    if (document.querySelector(".project")) {
+      const projectTrigger = document.querySelector(".gsap-projectTrigger");
+      const homeProjectFigure = document.querySelector(".project-figure");
+      const homeProjectInfo = document.querySelector(".project-info");
+
+      if (homeProjectFigure) {
+        gsap.from(homeProjectFigure, {
+          y: 80,
+          duration: 1.5,
+          opacity: 0,
+          ease: "Power1.out",
+          scrollTrigger: {
+            trigger: projectTrigger,
+            start: "top center",
+            onEnter: playHomeVideo,
+          },
+        });
+      } else {
+        console.warn("Home project figure element not found.");
+      }
+
+      if (homeProjectInfo) {
+        gsap.from(homeProjectInfo, {
+          y: 40,
+          duration: 1,
+          opacity: 0,
+          ease: "Power1.out",
+          delay: 0.5,
+          scrollTrigger: {
+            trigger: homeProjectInfo,
+            start: "top bottom",
+          },
+        });
+      } else {
+        console.warn("Home project info element not found.");
+      }
+
+      function playHomeVideo() {
+        const homeVideo = document.getElementById("home-video") as HTMLVideoElement;
+
+        if (homeVideo) {
+          homeVideo.play();
+        } else {
+          console.warn("Home video element not found.");
+        }
+      }
+    }
+  });
+</script>

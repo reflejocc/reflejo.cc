@@ -1,0 +1,128 @@
+---
+interface Props {
+  model: {
+    id: string;
+    name: string;
+    image: string;
+    date: string;
+    category: string;
+    info?: {
+      from?: string;
+      photographer?: string;
+      languages?: string[];
+      available?: boolean;
+    };
+  };
+}
+
+const { model } = Astro.props;
+---
+
+<div
+  class="gallery-item"
+  data-gender={model.category}
+  data-gallery-item
+  data-name={model.name.toLowerCase()}
+  data-location={model.info?.from?.toLowerCase()}
+  data-photographer={model.info?.photographer?.toLowerCase()}
+>
+  <div class="gallery-figure">
+    <img src={model.image} alt={model.name} class="slImg" loading="lazy" />
+  </div>
+  <div class="gallery-info">
+    <div class="gallery-info__title s">
+      {model.name}
+    </div>
+    <!-- <div class="gallery-info__date xs">
+            {model.info?.from || ""}
+        </div> -->
+    <div class="gallery-info__cta xxs">
+      <a href={`/services/${model.id}`} class="c-text__link cta link-underlined">
+        <img
+          src="/images/icon/arrow.svg"
+          alt=""
+          class="icon--s icon--left c-text__link--arrow"
+        />
+        <span class="xxs">View Detail</span>
+      </a>
+    </div>
+  </div>
+  <a href={`/services/${model.id}`} class="item-link"></a>
+</div>
+
+<style lang="scss">
+  .gallery-item {
+    display: block;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.5s ease;
+    margin-bottom: 2rem;
+    overflow: hidden;
+    width: 100%;
+
+    &.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .gallery-figure {
+      overflow: hidden;
+
+      img {
+        width: 100%;
+        height: auto;
+        transition: transform 0.5s ease;
+        object-fit: cover;
+        aspect-ratio: 3/4;
+      }
+    }
+
+    &:hover .gallery-figure img {
+      transform: scale(1.05);
+    }
+
+    .gallery-info {
+      padding: 1rem 0;
+
+      &__title {
+        font-weight: 600;
+        margin-bottom: 0.25rem;
+        font-family: var(--font-name) !important;
+        font-optical-sizing: auto !important;
+        font-weight: 500;
+        font-style: normal;
+        @media (max-width: 768px) {
+          font-size: 1.5rem;
+        }
+      }
+
+      &__date {
+        color: var(--color-300);
+        margin-bottom: 0.5rem;
+      }
+
+      &__cta {
+        opacity: 0;
+        transform: translateY(10px);
+        transition: all 0.3s ease;
+      }
+    }
+
+    &:hover .gallery-info__cta {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .c-text__link--arrow {
+      width: 16px;
+    }
+    .item-link {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      cursor: pointer;
+    }
+  }
+</style>

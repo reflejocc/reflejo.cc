@@ -1,0 +1,28 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import { homeTDK } from '../config/seoTdk';
+import Hero from '@/components/section/Hero.astro';
+import News from '@/components/section/News.astro';
+import Marquee from '@/components/section/Marquee.astro';
+// import LatestBlog from '@/components/section/LatestBlog.astro';
+import About from '@/components/section/About.astro';
+// import Project from '@/components/section/Project.astro';
+import Preloader from '@/components/ui/Preloader.astro';
+---
+
+<Layout
+title={homeTDK.title  || ''}
+description ={homeTDK.description  || ''}
+keywords = {homeTDK.keywords  || ''}
+>
+<div class="index" >
+	<Preloader />
+	<About />
+	<Hero/>
+	<Marquee />
+	<!-- <News /> -->
+	<!-- <Project /> -->
+	<!-- <LatestBlog /> -->
+</div>
+</Layout>
+

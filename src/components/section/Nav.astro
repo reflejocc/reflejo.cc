@@ -1,0 +1,239 @@
+---
+// @ts-nocheck
+export const navConfig = {
+  name: "REFLEJO",
+  description: "REFLEJO - creative co-op",
+  header: {
+    logo: {
+      src: "/images/logo-black.png",
+      alt: "REFLEJO",
+      href: "/",
+    },
+    nav: {
+      desktop: [
+        {
+          // title: "All Page",
+          // href: "javascript:void(0);",
+          // dropdown: true,
+          // items: [
+          //   { title: "Home", href: "/" },
+          //   { title: "Services", href: "/services" },
+          //   { title: "Blog", href: "/blog" },
+          //   { title: "Join Us", href: "/joinus" },
+          //   { title: "Contact", href: "/contact" },
+          //   { title: "Search", href: "/search" },
+          //   { title: "In the rye", href: "/themes/in-the-rye" },
+          //   { title: "404", href: "/404" },
+          //   { title: "Terms", href: "/legal/terms" },
+          //   { title: "Privacy Policy", href: "/legal/privacy" },
+          // ],
+        },
+        { title: "Services", href: "/services" },
+        { title: "Blog", href: "/blog" },
+        { title: "Contact", href: "/contact" },
+        // { title: "", href: "/search", icon: "/images/icon/search.svg" },
+        // { title: "Home", href: "/" },
+        // { title: "Join Us", href: "/joinus" },
+      ],
+      mobile: [
+        { title: "Home", href: "/" },
+        { title: "Services", href: "/services" },
+        { title: "Blog", href: "/blog" },
+        { title: "Contact", href: "/contact" },
+        // { title: "Search", href: "/search" },
+        // { title: "In the rye", href: "/themes/in-the-rye" },
+        // { title: "Join Us", href: "/joinus" },
+      ],
+    },
+  },
+};
+---
+
+<div class="header mobile-header animate-hidden" id="header">
+  <div class="header-wrapper">
+    <div class="container header-row">
+      <div class="header-logo">
+        <a href={navConfig.header.logo.href}>
+          <img
+            src={navConfig.header.logo.src}
+            alt={navConfig.header.logo.alt}
+            class="logo"
+          />
+        </a>
+      </div>
+
+      <div class="nav pc-nav col-8 col-md-8 col-lg-8 col-xl-6">
+        <ul class="nav-menu">
+          {
+            navConfig.header.nav.desktop.map((item) => (
+              <li class="nav-menu-li">
+                {item.dropdown ? (
+                  <div class="dropdown">
+                    <a
+                      href={item.href}
+                      class="nav-menu__link link-solid dropdown-toggle"
+                    >
+                      {item.title}
+                      <svg
+                        class="dropdown-arrow"
+                        width="12"
+                        height="12"
+                        viewBox="0 0 12 12"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M2.5 4.5L6 8L9.5 4.5"
+                          stroke="currentColor"
+                          stroke-width="1.5"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
+                      </svg>
+                    </a>
+                    <div class="dropdown-menu">
+                      {item.items &&
+                        item.items.map((subItem) => (
+                          <a href={subItem.href} class="dropdown-item">
+                            {subItem.title}
+                          </a>
+                        ))}
+                    </div>
+                  </div>
+                ) : (
+                  <a href={item.href} class="nav-menu__link link-solid">
+                    {item.title}
+                    {item.icon && (
+                      <img src={item.icon} alt="" class="nav-menu__icon" />
+                    )}
+                  </a>
+                )}
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <div class="hamburger">
+        <div class="hamburger-toggle">
+          <span></span>
+        </div>
+      </div>
+
+      <div class="m-nav">
+        <div class="m-nav-wrap">
+          <ul class="m-menu">
+            {
+              navConfig.header.nav.mobile.map((item) => (
+                <li class="m-menu-li">
+                  <a href={item.href} class="m-menu__link l">
+                    {item.title}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </div>
+
+      <div class="m-nav-mask"></div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .pc-nav {
+    z-index: 99;
+  }
+
+  .dropdown {
+    position: relative;
+    display: inline-block;
+    z-index: 99;
+  }
+
+  .dropdown-toggle {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+  }
+
+  .dropdown-arrow {
+    transition: transform 0.2s ease;
+    margin-left: 4px;
+  }
+
+  .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    visibility: hidden;
+    opacity: 0;
+    min-width: 220px;
+    padding: 16px 0;
+    margin: 0px 0 0;
+    background-color: #fff;
+    border-radius: 6px;
+    box-shadow:
+      0 10px 25px -5px rgba(0, 0, 0, 0.1),
+      0 8px 10px -6px rgba(0, 0, 0, 0.1);
+    transform: translateY(10px);
+    transition:
+      opacity 0.2s ease,
+      transform 0.2s ease,
+      visibility 0.2s ease;
+    pointer-events: none;
+  }
+
+  .dropdown:hover .dropdown-menu {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .dropdown:hover .dropdown-arrow {
+    transform: rotate(180deg);
+  }
+
+  .dropdown-item {
+    display: block;
+    padding: 8px 16px;
+    font-size: 16px;
+    color: var(--color-100);
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+    white-space: nowrap;
+  }
+
+  .dropdown-item:hover {
+    background-color: var(--color-800);
+  }
+
+  @media (max-width: 767px) {
+    .dropdown-menu {
+      display: none;
+    }
+    .dropdown-toggle svg {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener("astro:page-load", () => {
+    document.querySelector(".hamburger-toggle").addEventListener("click", function () {
+        this.classList.toggle("close-line");
+        document.querySelector(".m-nav").classList.toggle("is-active");
+        document.querySelector(".m-nav-mask").classList.toggle("is-active");
+      });
+
+    document.querySelector(".m-nav-mask").addEventListener("click", function () {
+        document.querySelector(".hamburger-toggle").classList.toggle("close-line");
+        this.classList.toggle("is-active");
+        document.querySelector(".m-nav").classList.toggle("is-active");
+      });
+  });
+</script>

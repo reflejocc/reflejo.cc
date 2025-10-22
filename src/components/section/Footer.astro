@@ -1,0 +1,123 @@
+---
+import Analytics from "@/components/function/Analytics.astro";
+import { footerConfig } from "../../config/footer";
+const { social, quickLinks, legal, contact, brand, bottom } = footerConfig;
+---
+
+<section class="footer">
+  <div class="container footer-container">
+    <div class="footer-body">
+      <div class="footer-content">
+        <div class="footer-social col-12 col-md-4 col-lg-4">
+          <div class="footer-social__content">
+            <div class="footer-social__title">
+              <h3 class="m">{social.title}</h3>
+              <p class="xs">{social.description}</p>
+            </div>
+            <div class="footer-social__list">
+              {
+                Object.values(social.items).map((item) => (
+                  <a
+                    href={item.href}
+                    class="footer-social__item"
+                    target={item.target}
+                  >
+                    <img
+                      src={item.icon}
+                      alt={item.title}
+                      class="footer-social__logo"
+                    />
+                  </a>
+                ))
+              }
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-nav col-12 col-md-8 col-lg-7 ml-auto">
+          <div class="footer-list col-12 col-md-3">
+            <div class="footer-contact__title text-uppercase xs">
+              {quickLinks.title}
+            </div>
+            <ul>
+              {
+                quickLinks.items.map((item) => (
+                  <li class="footer-contact__item">
+                    <a href={item.href} class="footer-links link-solid xs">
+                      {item.title}
+                    </a>
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+
+          <div class="footer-list col-12 col-md-3">
+            <div class="footer-contact__title text-uppercase xs">
+              {legal.title}
+            </div>
+            <ul>
+              {
+                legal.items.map((item) => (
+                  <li class="footer-contact__item">
+                    <a href={item.href} class="footer-links link-solid xs">
+                      {item.title}
+                    </a>
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+
+          <div class="footer-list footer-info col-12 col-md-6">
+            <div class="footer-contact__title text-uppercase xs">
+              {contact.title}
+            </div>
+            <ul class="footer-info__list">
+              {
+                Object.entries(contact.items).map(([key, item], index) => (
+                  <li
+                    class="footer-contact__item footer-info__item"
+                    style={index === 0 ? "padding-top:0;" : ""}
+                  >
+                    <div class="footer-info__icon">
+                      <img src={item.icon} alt={item.title} />
+                    </div>
+                    <div class="footer-info__text">
+                      <p class="block xs text-uppercase">{item.title}</p>
+                      <span class="block xs">{item.value}</span>
+                    </div>
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-brand">
+        <img src={brand.logo} alt={brand.alt} class="footer-brand__figure" />
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="footer-bottom__line"></div>
+      <div class="footer-bottom__content">
+        <div class="copyright">{bottom.copyright}</div>
+        <a
+          href="javascript:void(0);"
+          class="toTop"
+          onclick="window.scrollTo({top: 0, behavior: 'smooth'})"
+        >
+          {bottom.backToTop.text}
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<Analytics />
+
+<script>
+  import "../../scripts/script.js";
+</script>

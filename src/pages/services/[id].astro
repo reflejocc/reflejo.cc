@@ -1,0 +1,198 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import modelsData from "../../data/models.json";
+import ButtonContact from "@/components/ui/ButtonContact.astro";
+export function getStaticPaths() {
+  return modelsData.models.map((model) => ({
+    params: { id: model.id },
+    props: { model },
+  }));
+}
+
+const { model } = Astro.props;
+---
+
+<Layout title={model.name}>
+  <section class="model">
+    <div class="container model-container">
+      <div class="model-overview row">
+        <div
+          class="model-portfolio col-12 col-sm-5 col-md-4 col-lg-4"
+          data-sticky-container
+        >
+          <div class="js-sticky model-portfolio__wrapper" data-margin-top="60">
+            <h2 class="model-name m">{model.name}</h2>
+            <div class="model-info">
+              {
+                Object.entries(model.measurements).map(([key, value]) => (
+                  <div class="model-info__item">
+                    <div class="model-info__type">{key.toUpperCase()}</div>
+                    <div class="model-info__value">
+                      {value} {key === "height" ? "CM" : ""}
+                    </div>
+                  </div>
+                ))
+              }
+
+              {
+                Object.entries(model.info).map(([key, value]) => (
+                  <div class="model-info__item">
+                    <div class="model-info__type">{key.toUpperCase()}</div>
+                    <div class="model-info__value">
+                      {Array.isArray(value) ? value.join(", ") : value}
+                    </div>
+                  </div>
+                ))
+              }
+            </div>
+            <div class="model-info__contact">
+              <ButtonContact />
+            </div>
+          </div>
+        </div>
+
+        <div class="model-content col-12 col-sm-7 col-md-8 col-lg-8">
+          <ul class="model-gallery">
+            {
+              model.gallery.map((image, index) => (
+                <li
+                  class={`model-gallery__item col-12 col-md-12 ${index % 3 === 2 ? "col-lg-12" : "col-lg-6"}`}
+                >
+                  <img
+                    src={image}
+                    alt={`${model.name} - ${index + 1}`}
+                    class="model-gallery__figure"
+                  />
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<script>
+  import Lenis from "lenis";
+  import Sticky from "sticky-js";
+  const lenis = new Lenis({});
+
+  document.addEventListener("astro:page-load", () => {
+
+  if (document.querySelector('.js-sticky')) {
+    const sticky = new Sticky(".js-sticky", {
+      marginTop: 40,
+      stickyFor: 768,
+      stickyClass: "is-sticky",
+    });
+
+    const lenis = new Lenis({
+      lerp: 0.1,
+      wheelMultiplier: 0.7,
+      touchMultiplier: 0.7,
+      smoothWheel: true,
+    });
+
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+
+    requestAnimationFrame(raf);
+
+    lenis.on("scroll", () => {
+      sticky.update();
+    });
+
+    return () => {
+      sticky.destroy();
+      lenis.destroy();
+    };
+  };
+});
+</script>
+<style lang="scss">
+  .model-portfolio {
+    &__wrapper {
+      padding-bottom: 2rem;
+    }
+    .js-sticky {
+      &.is-sticky {
+        position: fixed;
+        top: 40px;
+        width: inherit;
+        z-index: 10;
+      }
+    }
+  }
+  @media (max-width: 767px) {
+    .js-sticky {
+      position: relative !important;
+      top: auto !important;
+      width: 100% !important;
+    }
+  }
+  .js-sticky {
+    transition: all 0.3s ease;
+  }
+  .model-name {
+    font-family: var(--font-name);
+    @media (max-width: 576px) {
+      font-size: 3rem;
+    }
+  }
+  .model {
+    .container:first-child {
+      margin: 4rem auto;
+    }
+    &-overview {
+      position: relative;
+    }
+    &-portfolio {
+      position: relative;
+      padding: 5px;
+      overflow: hidden;
+      @media (max-width: 576px) {
+        padding: 20px 20px;
+        position: relative;
+      }
+    }
+    &-info {
+      margin-top: 60px;
+      &__item {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+      &__type {
+        text-transform: uppercase;
+        margin-right: 12px;
+        font-size: 1rem;
+        color: var(--color-300);
+      }
+      &__value {
+        font-size: 1.25rem;
+        font-weight: 500;
+        color: var(--color-100);
+      }
+    }
+    &-gallery {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+
+      &__item {
+        overflow: hidden;
+        padding: 5px;
+        font-size: 0;
+      }
+      &__figure {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+      }
+    }
+  }
+</style>

@@ -1,0 +1,63 @@
+---
+import { ClientRouter } from "astro:transitions";
+import Meta from "@/components/function/Meta.astro";
+import "splitting/dist/splitting.css";
+import "splitting/dist/splitting-cells.css";
+import "../styles/main.scss";
+
+
+interface Props {
+  title?: string;
+  description?: string;
+  keywords?: string;
+  ogImage?: string;
+  twitterHandle?: string;
+}
+
+const { title, description, keywords, ogImage, twitterHandle } = Astro.props;
+---
+
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"
+/>
+<meta name="generator" content={Astro.generator} />
+<Meta
+  title={title}
+  description={description}
+  keywords={keywords}
+  ogImage={ogImage}
+  twitterHandle={twitterHandle}
+/>
+<link rel="icon" type="image/svg+xml" href="/favicon.png" />
+<link rel="sitemap" href="/sitemap-index.xml" />
+<link
+  rel="alternate"
+  type="application/rss+xml"
+  title={title}
+  href={new URL("rss.xml", Astro.site)}
+/>
+
+<link rel="preconnect" href="https://stijndv.com" />
+<link rel="stylesheet" href="https://stijndv.com/fonts/Eudoxus-Sans.css" />
+
+<ClientRouter />
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+  gsap.registerPlugin(ScrollTrigger);
+  import Lenis from "lenis";
+
+  const lenis = new Lenis({
+    duration: 1.2,
+    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+  });
+
+  function raf(time: number) {
+    lenis.raf(time);
+    requestAnimationFrame(raf);
+  }
+
+  requestAnimationFrame(raf);
+</script>

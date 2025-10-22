@@ -1,0 +1,230 @@
+---
+import { getCollection } from "astro:content";
+const posts = (await getCollection("blog"))
+  .sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf())
+  .slice(0, 5); // latest 5 article
+---
+
+<section class="article">
+  <div class="container-fluid article-container">
+    <div class="section-header link inactive-prev container">
+      <div class="section-header__title splitting-heading xl">Articles</div>
+      <div class="section-header__link">
+        <a href="/blog" class="link btn btn--outline--rounded-full">
+          <div class="link__value">All Articles</div>
+          <img
+            src="/images/icon/arrow.svg"
+            alt=""
+            class="link__icon icon--s link__icon--right"
+          />
+        </a>
+        <div
+          class="section-header__arrows article-arrows slider__arrows show-arrows inactive-prev hidden-lg"
+        >
+          <div class="hero-swiper-navigation slider__arrows-row">
+            <div class="article-swiper-prev swiper-prev slider__arrows__prev">
+              <img
+                src="/images/icon/arrow-left.svg"
+                alt=""
+                class="slider__arrows__ico icon icon--xs"
+              />
+              <span class="slider__arrows__text xs">Prev</span>
+            </div>
+            <div class="slider__arrows__tip xs">Grap</div>
+            <div class="article-swiper-next swiper-next slider__arrows__next">
+              <span class="slider__arrows__text xs">Next</span>
+              <img
+                src="/images/icon/arrow-right.svg"
+                alt=""
+                class="slider__arrows__ico icon icon--xs"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="section-header__line line-extend"></div>
+    </div>
+    <div class="section-body article-inner">
+      <div class="article-wrapper swiper articleSwiper">
+        <div class="article-list swiper-wrapper">
+          {posts.map((post) => (
+            <div class="swiper-slide article-item">
+              <div class="article-figure col-10 col-md-10 col-lg-5">
+                <a href={`/blog/${post.slug}`} class="article-figure__inner">
+                  <img
+                    src={post.data.cover || "/images/default-cover.jpg"}
+                    alt={post.data.coverAlt || "Article cover"}
+                    class="article-figure__img abs full cover"
+                  />
+                </a>
+              </div>
+              <div class="article-content col-10 col-md-10 col-lg-5 p-0">
+                <div class="article-content__inner">
+                  <div class="article-date">
+                    ({new Date(post.data.publishDate).toLocaleDateString()})
+                  </div>
+                  <h1 class="article-title xl">{post.data.title}</h1>
+                  <a href={`/blog/${post.slug}`} class="article-link c-text__link cta link-solid">
+                    <img
+                      src="/images/icon/arrow.svg"
+                      alt=""
+                      class="icon--s icon--left c-text__link--arrow"
+                    />
+                    <span>Read More</span>
+                  </a>
+                </div>
+              </div>
+              <a href={`/blog/${post.slug}`} class="item-link"></a>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+  import Swiper from 'swiper/bundle';
+  import 'swiper/css/bundle';
+  gsap.registerPlugin(ScrollTrigger);
+
+  document.addEventListener("astro:page-load", () => {
+    new Swiper(".articleSwiper", {
+      navigation: {
+        nextEl: ".article-swiper-next",
+        prevEl: ".article-swiper-prev",
+      },
+      autoplay: false,
+      loop: false,
+      grabCursor: true,
+      speed: 750,
+      slidesPerView: 1.16,
+      spaceBetween: 10,
+      breakpoints: {
+        767: {
+          slidesPerView: 1.2,
+          spaceBetween: 40,
+        },
+      },
+    });
+
+    const articleList = gsap.utils.toArray<Element>(".article-item");
+    const articleObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+          const articleFig = entry.target;
+          gsap.from(articleFig, {
+            x: -100,
+            duration: 1.5,
+            opacity: 0,
+            ease: "Power1.out",
+            delay: index * 1.5,
+          });
+          articleObserver.unobserve(articleFig);
+        }
+      });
+    });
+    articleList.forEach((articleFig) => {
+      articleObserver.observe(articleFig);
+    });
+  });
+</script>
+
+<style lang="scss">
+  .article {
+  &-inner {
+    padding-left: var(--pad-inner);
+  }
+
+  .section-header__link {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+
+    @media (max-width: 576px) {
+      justify-content: flex-end;
+    }
+  }
+
+  &-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    will-change: transform;
+    flex-wrap: wrap;
+  }
+
+  &-figure {
+    --ratio: 50%;
+    padding-top: var(--ratio);
+    position: relative;
+    background-color: #eaeaea;
+    will-change: transform;
+    transform: translate3d(0, 0, 0);
+
+    @media (max-width: 1023px) {
+      --ratio: 75%;
+    }
+
+    @media (max-width: 991px) {
+      --ratio: 66.6666%;
+    }
+
+    @media (max-width: 767px) {
+      --ratio: 100%;
+    }
+
+    &__inner {
+      position: absolute;
+      top: -1px;
+      left: -1px;
+      width: calc(100% + 2px);
+      height: calc(100% + 2px);
+      overflow: hidden;
+      will-change: transform;
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
+  &-content {
+    @media (max-width: 991px) {
+      margin: 40px 0 20px;
+    }
+
+    &__inner {
+      .article-title {
+        margin: 40px 0;
+        text-transform: none;
+        max-width: 80%;
+        line-height: 1.08;
+
+    @media (max-width: 1600px) {
+          font-size: 3.5rem;
+        }
+
+      @media (max-width: 1367px) {
+          font-size: 3rem;
+        }
+
+      @media (max-width: 767px) {
+          font-size: 5vw;
+        }
+
+     @media (max-width: 576px) {
+          font-size: 6.5vw;
+          max-width: 100%;
+          margin: 16px 0 32px;
+        }
+
+      }
+
+      .article-link {
+        position: relative;
+      }
+    }
+  }
+}
+
+</style>

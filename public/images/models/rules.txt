@@ -1,0 +1,20 @@
+统一路径结构：所有模特相关的图片都放在 /images/models/ 下，按照模特ID和名称创建子文件夹
+命名规范化：文件夹名称采用 ID-名字小写连字符 的格式，如 001-alina-rai
+图片命名统一：封面图统一命名为 cover.jpg，画廊图片按序号命名为 01.jpg、02.jpg 等
+Unified path structure: all model-related pictures are placed under /images/models/, and subfolders are created according to the model ID and name. Normalized naming: the folder name adopts the format of ID-name lowercase hyphen, such as 001-alina-rai picture naming unification: the cover picture is uniformly named as cover.jpg, and the gallery picture is named 01.jpg, 02.jpg, etc.
+```
+/public
+  /images
+    /models
+      /001-alina-rai
+        /cover.jpg        # Cover
+        /01.jpg           # picture1
+        /02.jpg           # picture2
+        /03.jpg           # picture3
+      /002-david-miller
+        /cover.jpg
+        /01.jpg
+        /02.jpg
+        /03.jpg
+      ...more
+```

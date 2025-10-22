@@ -1,0 +1,125 @@
+---
+const slides = [
+  {
+    href: "/themes/in-the-rye",
+    imgSrc: "/images/home/hero/001.jpg",
+    name: "IN THE RYE",
+    author: "@cottonbro",
+    date: "(2024.05)"
+  },
+  {
+    href: "/themes/in-the-rye",
+    imgSrc: "/images/home/hero/002.jpg",
+    name: "SOCIAL DISTANCE",
+    author: "@cottonbro",
+    date: "(2024.05)"
+  },
+  {
+    href: "/themes/in-the-rye",
+    imgSrc: "/images/home/hero/003.jpg",
+    name: "SOCIAL DISTANCE",
+    author: "@cottonbro",
+    date: "(2024.05)"
+  },
+  {
+    href: "/themes/in-the-rye",
+    imgSrc: "/images/home/hero/004.jpg",
+    name: "IN THE RYE",
+    author: "@cottonbro",
+    date: "(2024.05)"
+  },
+  {
+    href: "/themes/in-the-rye",
+    imgSrc: "/images/home/hero/005.jpg",
+    name: "SOCIAL DISTANCE",
+    author: "@cottonbro",
+    date: "(2024.05)"
+  },
+  {
+    href: "/themes/in-the-rye",
+    imgSrc: "/images/home/hero/006.jpg",
+    name: "SOCIAL DISTANCE",
+    author: "@cottonbro",
+    date: "(2024.05)"
+  },
+  {
+    href: "/themes/in-the-rye",
+    imgSrc: "/images/home/hero/007.jpg",
+    name: "SOCIAL DISTANCE",
+    author: "@cottonbro",
+    date: "(2024.05)"
+  }
+];
+---
+<!-- hero -->
+<div class="hero hero-section">
+  <div class="container-fluid hero-container p-0">
+    <div class="hero-inner grap swiper heroSwiper">
+      <div class="hero-list swiper-wrapper">
+        {slides.map((slide) => (
+          <div class="swiper-slide hero-item">
+            <a href={slide.href} class="hero-figure">
+              <img src={slide.imgSrc} alt={slide.name} class="hero-figure__img" />
+            </a>
+            <div class="hero-content">
+              <div class="hero-info">
+                <span class="hero-info__name">{slide.name}</span>
+                <span class="hero-info__author">{slide.author}</span>
+              </div>
+              <div class="hero-date">{slide.date}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div class="section-footer__arrows hero-arrows slider__arrows show-arrows inactive-prev">
+        <div class="hero-swiper-navigation slider__arrows-row">
+          <div class="hero-swiper-prev swiper-prev  slider__arrows__prev">
+            <img src="/images/icon/arrow-left.svg" alt="" class="slider__arrows__ico icon icon--xs" />
+            <span class="slider__arrows__text xs">Prev</span>
+          </div>
+          <div class="slider__arrows__tip xs">Grap</div>
+          <div class="hero-swiper-next swiper-next slider__arrows__next">
+            <span class="slider__arrows__text xs">Next</span>
+            <img src="/images/icon/arrow-right.svg" alt="" class="slider__arrows__ico icon icon--xs" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+import Swiper from 'swiper/bundle';
+import 'swiper/css/bundle';
+    //Home Hero Swiper
+document.addEventListener("astro:page-load", () => {
+  const heroSwiper = new Swiper(".heroSwiper", {
+      navigation: {
+        nextEl: ".hero-swiper-next",
+        prevEl: ".hero-swiper-prev",
+      },
+      slidesPerView: 1.16,
+      spaceBetween: 10,
+      grabCursor: true,
+      breakpoints: {
+        576: {
+          slidesPerView: 1.5,
+          spaceBetween: 20,
+        },
+        767: {
+          slidesPerView: 2.5,
+          spaceBetween: 20,
+        },
+        1023: {
+          slidesPerView: 3.2,
+          spaceBetween: 20,
+        },
+        1500: {
+          slidesPerView: 3.5,
+          spaceBetween: 20,
+        },
+      },
+    });
+
+});
+</script>

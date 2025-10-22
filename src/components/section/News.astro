@@ -1,0 +1,163 @@
+---
+import modelsData from '../../data/models.json';
+
+// get 9 model data
+const featuredModels = modelsData.models.slice(0, 9);
+---
+
+<section class="newly">
+    <div class="container newly-container">
+        <div class="section-header link inactive-prev">
+            <div class="section-header__title splitting-heading xl">
+                Models
+            </div>
+            <div class="section-header__link">
+                <a href="/models" class="link btn btn--outline--rounded-full">
+                    <div class="link__value">
+                        All Models
+                    </div>
+                    <img src="/images/icon/arrow.svg" alt="" class="link__icon icon--s link__icon--right">
+                </a>
+            </div>
+            <div class="section-header__line line-extend">
+            </div>
+        </div>
+        <div class="section-body">
+            <div class="newly-inner">
+                <div class="newly-list">
+                    {featuredModels.map((model) => (
+                        <div class="newly-item">
+                            <div class="newly-figure">
+                                <img src={model.image} alt={model.name} class="slImg" loading="lazy">
+                            </div>
+                            <div class="newly-info">
+                                <div class="newly-info__title s">
+                                    {model.name}
+                                </div>
+                                <div class="newly-info__date xs is-hidden">
+                                    {model.date}
+                                </div>
+                                <!-- <div class="newly-info__cta xs">
+                                    <a class="c-text__link cta link-underlined">
+                                        <img src="/images/icon/arrow.svg" alt="" class="icon--s icon--left c-text__link--arrow">
+                                        <span>View Detail </span>
+                                    </a>
+                                </div> -->
+                            </div>
+                            <a href={`/models/${model.id}`} class="item-link"></a>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style lang="scss">
+    .newly{
+    &-list{
+        display: flex;
+        flex-wrap: wrap;
+        align-items:flex-start;
+        justify-content: space-between;
+    }
+    &-item{
+        position: relative;
+        cursor: pointer;
+        font-size: 0;
+        &:hover .newly-figure img{
+        transform: scale(1.05);
+        }
+    }
+    &-figure{
+        position: relative;
+        overflow: hidden;
+        img{
+        transition: all .65s ease-in-out;
+        &:hover{
+            transform: scale(1.1);
+        }
+        }
+    }
+    &-info{
+        position: relative;
+        margin-top: 10px;
+        &__text{
+        display: flex;
+        justify-content: flex-start;
+        align-items: baseline;
+        }
+        &__title{
+        font-family: var(--font-name)!important;
+        font-optical-sizing: auto!important;;
+        font-weight: 500;
+        font-style: normal;
+        }
+        &__date{
+        display: inline-block;
+        margin-left:12px;
+        }
+    }
+    &-item{
+        max-width: 27.6%;
+        width: 100%;
+        &:nth-child(3n+1){
+        margin-top: 90px;
+        }
+        &:nth-child(3n+2){
+        margin-top: 0;
+        }
+        &:nth-child(3n+3){
+        margin-top: 45px;
+        }
+        @media (max-width: 1199px){
+        max-width: 42.44%;
+        &:nth-child(3n+3){
+            margin-top: unset;
+        }
+        &:nth-child(2n+1){
+            margin-top: 0px;
+        }
+        &:nth-child(2n+2){
+            margin-top: 45px;
+        }
+        }
+        @media (max-width: 576px) {
+            max-width: 44%;
+            &:nth-child(2n+1){
+                margin-top: 20px;
+            }
+            &:nth-child(2n+2){
+                margin-top: 60px;
+            }
+        }
+
+    }
+    }
+</style>
+<script>
+import { gsap } from "gsap";
+document.addEventListener('astro:page-load', () => {
+        const newlyList = gsap.utils.toArray<Element>('.newly-item');
+        const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+            const img = entry.target;
+            gsap.from(img, {
+                y: 80,
+                duration: 1.5,
+                opacity: 0,
+                ease: "Power1.out",
+                delay: 0.5,
+            });
+            observer.unobserve(img);
+            }
+        });
+        });
+
+        newlyList.forEach((img) => {
+            observer.observe(img);
+        });
+
+});
+</script>

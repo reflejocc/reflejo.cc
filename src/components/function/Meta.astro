@@ -1,0 +1,41 @@
+---
+export interface Props {
+  title?: string;
+  description?: string;
+  keywords?: string;
+  url?: string;
+  ogImage?: string;
+  twitterHandle?: string;
+}
+
+const {
+  title = "Default Title",
+  description = "Default description for the page.",
+  keywords = "default, keywords",
+  url = import.meta.env.PUBLIC_SITE_URL,
+  ogImage = "/og.png",
+  twitterHandle = "@twitterName",
+} = Astro.props;
+---
+
+<!-- Meta Tags -->
+<title>{title}</title>
+<meta name="description" content={description} />
+<meta name="keywords" content={keywords} />
+
+
+<!-- Open Graph Tags -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={url} />
+<meta property="og:image" content={ogImage} />
+<meta property="og:site_name" content="GradientsHub" />
+
+<!-- Twitter Meta Tags -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImage} />
+<meta name="twitter:site" content={twitterHandle} />
+<meta name="twitter:creator" content={twitterHandle} />

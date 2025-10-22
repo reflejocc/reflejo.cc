@@ -1,0 +1,54 @@
+---
+interface Props {
+  href?: string;
+  target?: string;
+  className?: string;
+  size?: 'large' | 'medium' | 'small' | 'x-small';
+  variant?: 'default' | 'tag' | 'outline' | 'white' | 'red' | 'gray' | 'dark';
+  shape?: 'default' | 'rounded' | 'rounded-full' | 'circle' | 'square';
+  full?: boolean;
+  icon?: boolean;
+}
+
+const {
+  href = "javascript:void(0)",
+  target = "_self",
+  className = "",
+  size = "medium",
+  variant = "dark",
+  shape = "rounded-full",
+  full = false,
+  icon = false
+} = Astro.props;
+
+const classes = [
+  'btn',
+  size && `btn--${size}`,
+  variant !== 'default' && `btn--${variant}`,
+  shape !== 'default' && `btn--${shape}`,
+  full && 'btn--full',
+  className
+].filter(Boolean).join(' ');
+---
+
+<a href={href} target={target} class={classes}>
+  <slot />
+  {icon && (
+  <svg
+    class="btn-ico"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M14 5L21 12M21 12L14 19M21 12H3"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+  </svg>
+)}
+</a>

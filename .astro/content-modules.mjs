@@ -1,0 +1,9 @@
+
+export default new Map([
+["src/content/blog/curvy-nutrition-how-to-eat-right-as-a-curvy-model.mdx", () => import("astro:content-layer-deferred-module?astro%3Acontent-layer-deferred-module=&fileName=src%2Fcontent%2Fblog%2Fcurvy-nutrition-how-to-eat-right-as-a-curvy-model.mdx&astroContentModuleFlag=true")],
+["src/content/blog/become-a-commercial-model-possible.mdx", () => import("astro:content-layer-deferred-module?astro%3Acontent-layer-deferred-module=&fileName=src%2Fcontent%2Fblog%2Fbecome-a-commercial-model-possible.mdx&astroContentModuleFlag=true")],
+["src/content/blog/model-application-how-to-apply-as-a-model.mdx", () => import("astro:content-layer-deferred-module?astro%3Acontent-layer-deferred-module=&fileName=src%2Fcontent%2Fblog%2Fmodel-application-how-to-apply-as-a-model.mdx&astroContentModuleFlag=true")],
+["src/content/blog/how-to-succeed-at-a-model-call-and-get-booked.mdx", () => import("astro:content-layer-deferred-module?astro%3Acontent-layer-deferred-module=&fileName=src%2Fcontent%2Fblog%2Fhow-to-succeed-at-a-model-call-and-get-booked.mdx&astroContentModuleFlag=true")],
+["src/content/blog/the-right-diet-for-fitness-models.mdx", () => import("astro:content-layer-deferred-module?astro%3Acontent-layer-deferred-module=&fileName=src%2Fcontent%2Fblog%2Fthe-right-diet-for-fitness-models.mdx&astroContentModuleFlag=true")],
+["src/content/blog/everything-you-need-to-know-about-commercial-modelling.mdx", () => import("astro:content-layer-deferred-module?astro%3Acontent-layer-deferred-module=&fileName=src%2Fcontent%2Fblog%2Feverything-you-need-to-know-about-commercial-modelling.mdx&astroContentModuleFlag=true")]]);
+		

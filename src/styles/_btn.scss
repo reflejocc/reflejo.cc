@@ -1,0 +1,251 @@
+/*------------------------------------------------------------------
+ #btn style
+-------------------------------------------------------------------*/
+:root{
+  --btn-rounded: var(--radius);
+	--btn-rounded-full: 72px;
+	--btn-height: 48px;
+	--btn-pad: 24px;
+	--btn-bg: var(--color-100);
+	--btn-color: var(--color-999);
+	--btn-color-border: var(--color-100);
+	@include breakAt(sm-device) {
+		--btn-height: 28px;
+		--btn-pad: 12px;
+		font-size: calc(var(--text-size-primary)*0.85);
+	}
+
+}
+a{
+	text-decoration: none!important;
+	text-transform: uppercase;
+	color: var(--color-100);
+}
+.btn {
+	position: relative;
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+	width: auto;
+	height: var(--btn-height);
+	padding: 0 var(--btn-pad);
+	background-color: var(--btn-bg);
+	font-size: var(--text-size-primary);
+	font-weight: normal;
+	color: var(--color-100);
+	text-align: center;
+	cursor: pointer;
+	border: none;
+	white-space: nowrap;
+	letter-spacing: 0.5px;
+	transition: all 0.35s ease-in-out;
+  &-ico{
+	margin-left:6px;
+	width:18px;
+	transition: all 0.35s ease-in-out;
+  }
+  &:hover  &-ico{
+	transform: translateX(4px);
+	transition: all 0.35s ease-in-out;
+  }
+  &:focus {
+	outline: none
+  }
+  &:hover {
+	color: var(--btn-color);
+	text-decoration: none;
+  }
+
+  &[class*="--tag"] {
+	background: transparent;
+	border-radius: var(--btn-rounded-full);
+	color: var(--color-primary);
+	font-size: var(--text-size-medium);
+	border: 1px solid rgba(var(--color-primary-rgb), 0.3)
+  }
+
+  &[class*="--tag"]:hover {
+	background: transparent;
+	border-color: var(--color-primary);
+	color: var(--color-primary)
+  }
+
+  &[class*="--large"] {
+	--btn-height: 64px;
+	height: var(--btn-height);
+	padding: 0 4em;
+	font-size: 20px;
+	font-weight: 400;
+	line-height: var(--btn-height)
+  }
+
+  &[class*="--medium"] {
+	--btn-height: 52px;
+	height: var(--btn-height);
+	padding: 0 2.5em;
+	font-size: 16px;
+	line-height: var(--btn-height)
+  }
+
+  &[class*="--small"] {
+	--btn-height: 44px;
+	height:  var(--btn-height);
+	padding: 0 20px;
+	line-height: var(--btn-height);
+	font-size: 16px;
+  }
+
+  &[class*="--x-small"] {
+	--btn-height: 36px;
+	height:  var(--btn-height);
+	padding: 0 12px;
+	line-height: var(--btn-height);
+  }
+
+  &[class*="--extra-pad"] {
+	padding: 0 3em
+  }
+
+  &[class*="--rounded"] {
+	border-radius: var(--btn-rounded)
+  }
+
+  &[class*="--rounded-full"] {
+	border-radius: var(--btn-rounded-full)
+  }
+
+  &[class*="--color"] {
+	padding: 0;
+	border: none;
+	outline: 1px solid rgba(var(--color-primary-rgb), 0.3);
+	aspect-ratio: 1/1
+  }
+
+  &[class*="--color"]:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	border: 8px solid var(--btn-color-border);
+	border-radius: 50%;
+	transition: border .3s
+  }
+
+  &[class*="--color"]:hover:before {
+	border-width: 4px
+  }
+
+  &[class*="--full"] {
+	width: 100%
+  }
+
+  &[class*="--circle"] {
+	padding: 0;
+	border-radius: 50%
+  }
+
+  &[class*="--square"] {
+	padding: 0;
+	aspect-ratio: 1/1
+  }
+
+  &[class*="--circle"] {
+	padding: 0;
+	border-radius: 50%;
+	aspect-ratio: 1/1
+  }
+
+  &[class*="--dark"] {
+	color: var(--color-white);
+	border-color: rgba(255, 255, 255, .4)
+  }
+
+  &[class*="--dark"]:hover {
+	opacity: .8;
+  }
+
+  &[class*="--white"] {
+	--btn-bg: var(--color-white);
+	color: var(--color-primary)
+  }
+
+  &[class*="--red"] {
+	--btn-bg: #FA5D29;
+	color: var(--color-white)
+  }
+
+  &[class*="--gray"] {
+	--btn-bg: #d3d3d3;
+	color: var(--color-primary)
+  }
+
+  &[class*="--outline"] {
+	background: transparent;
+	border: 1px solid var(--color-primary);
+	color: var(--color-primary)
+  }
+
+  &[class*="--outline--gray"] {
+	border-color: #d3d3d3
+  }
+
+  &[class*="--outline--white"] {
+	border-color: #fff;
+	color: #fff
+  }
+
+  &[class*="--outline--white"]:hover {
+	background: #fff;
+	color: #222
+  }
+
+  &.is-active {
+	background-color: var(--bg-secondary);
+	color: var(--color-white)
+  }
+
+  svg {
+	position: relative;
+	vertical-align: middle;
+	fill: currentColor;
+	transition: all 0.3s ease-in-out;
+  }
+  &:hover svg {
+    fill: currentColor;
+	}
+}
+  @include breakAt(md-device) {
+	.btn[class*="--tag"] {
+		--btn-height: 36px;
+		--btn-pad: 16px;
+		font-size: var(--text-size-primary)
+	  }
+
+	  .btn[class*="--large"] {
+		--btn-height: 64px;
+		font-size: var(--text-size-primary)
+	  }
+
+	  .btn[class*="--medium"] {
+		--btn-height: 52px
+	  }
+  }
+  @include breakAt(sm-device) {
+	.btn[class*="--tag"] {
+		--btn-height: 28px;
+		--btn-pad: 12px;
+		font-size: calc(var(--text-size-primary)*0.85);
+	  }
+
+	  .btn[class*="--large"] {
+		--btn-height: 56px;
+		font-size: var(--text-size-primary)
+	  }
+
+	  .btn[class*="--medium"] {
+		--btn-height: 48px
+	  }
+  }

@@ -1,0 +1,52 @@
+html{
+    font-family:var(--font-primary);
+    font-display: swap;
+}
+h1, .h1, h2, .h2, h3, .h3, h4,.h4,h5,.h5 {
+    font-weight: bold;
+    color: var(--color-100);
+}
+
+strong{
+  font-weight: bold;
+}
+h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p {
+    margin: 0;
+}
+a:focus,
+button:focus {
+	outline: 0;
+}
+a {
+    text-decoration: none;
+    display: inline-block;
+}
+a:hover, a:active, a:focus {
+	text-decoration: none;
+	outline: 0;
+}
+a:hover {
+	color: initial;
+}
+ol {
+    list-style-position: inside;
+}
+ul, li {
+	padding: 0;
+	margin: 0;
+}
+
+.text-clamp-2{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+.text-clamp-1{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+}

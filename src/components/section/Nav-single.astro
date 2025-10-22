@@ -1,0 +1,73 @@
+---
+import { siteConfig } from "../../config/site";
+const { header } = siteConfig;
+---
+
+<div class="header mobile-header">
+  <div class="header-wrapper">
+    <div class="container header-row">
+      <div class="header-logo">
+        <a href={header.logo.href}>
+          <img src={header.logo.src} alt={header.logo.alt} class="logo" />
+        </a>
+      </div>
+
+      <div class="nav pc-nav col-8 col-md-8 col-lg-8 col-xl-6">
+        <ul class="nav-menu">
+          {
+            header.nav.desktop.map((item) => (
+              <li class="nav-menu-li">
+                <a href={item.href} class="nav-menu__link link-solid">
+                  {item.title}
+                  {item.icon && (
+                    <img src={item.icon} alt="" class="nav-menu__icon" />
+                  )}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <div class="hamburger">
+        <div class="hamburger-toggle">
+          <span></span>
+        </div>
+      </div>
+
+      <div class="m-nav">
+        <div class="m-nav-wrap">
+          <ul class="m-menu">
+            {
+              header.nav.mobile.map((item) => (
+                <li class="m-menu-li">
+                  <a href={item.href} class="m-menu__link l">
+                    {item.title}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </div>
+
+      <div class="m-nav-mask"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener("astro:page-load", () => {
+    document.querySelector(".hamburger-toggle").addEventListener("click", function () {
+        this.classList.toggle("close-line");
+        document.querySelector(".m-nav").classList.toggle("is-active");
+        document.querySelector(".m-nav-mask").classList.toggle("is-active");
+      });
+
+    document.querySelector(".m-nav-mask").addEventListener("click", function () {
+        document.querySelector(".hamburger-toggle").classList.toggle("close-line");
+        this.classList.toggle("is-active");
+        document.querySelector(".m-nav").classList.toggle("is-active");
+      });
+  });
+</script>

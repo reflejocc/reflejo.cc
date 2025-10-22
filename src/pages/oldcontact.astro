@@ -1,0 +1,365 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { contactTDK } from "../config/seoTdk";
+import ContactForm from "@/components/section/ContactForm.astro";
+---
+
+<Layout
+  title={contactTDK.title || ""}
+  description={contactTDK.description || ""}
+  keywords={contactTDK.keywords || ""}
+>
+  <div class="page-contact no-scroll">
+    <div class="page-content">
+      <!-- About us -->
+      <section class="about">
+        <div class="container about-container">
+          <div class="section-body">
+            <div class="about-inner">
+              <div class="c-text animate-section">
+                <div
+                  class="c-text-inner col-12 col-sm-10 col-md-8 col-lg-6 ml-auto"
+                >
+                  <div class="c-text__content col-12 col-lg-12 col-xl-10 p-0">
+                    <h3 class="title l animate-item">
+                        Creating visuals that reflect your story.
+                    </h3>
+                    <p class="s animate-item">
+                        <strong>REFLEJO</strong> is a creative cooperative founded in 2019,
+                        specializing in photography, videography, and related visual services.
+                        Dedicated to delivering high-quality, concept-driven work, Reflejo has
+                        steadily grown into a collaborative hub for visual storytelling. The
+                        co-op partners with a wide range of brands, artists, and communities,
+                        working closely with each client to craft authentic imagery and help them
+                        realize their creative goals.
+                    </p>
+                  </div>
+                  <a class="c-text__link cta link-underlined animate-item">
+                    <img
+                      src="/images/icon/arrow.svg"
+                      alt=""
+                      class="icon--s icon--left c-text__link--arrow"
+                    />
+                    <span>Contact Us</span>
+                  </a>
+                </div>
+              </div>
+              <div
+                class="about-content about-grid grid splitting-text-trigger animate-section"
+              >
+                <div class="about-figure grid__col-4 animate-item">
+                  <div class="about-figure__note s">
+                    <div class="light-dot"></div>
+                    Since
+                  </div>
+                  <div class="about-figure__title splitting-text">2018</div>
+                </div>
+                <div class="about-figure grid__col-4 animate-item">
+                  <div class="about-figure__note s">
+                    <div class="light-dot"></div>
+                    Singled Models
+                  </div>
+                  <div class="about-figure__title splitting-text">200+</div>
+                </div>
+                <div class="about-figure grid__col-4 animate-item">
+                  <div class="about-figure__note s">
+                    <div class="light-dot"></div>
+                    PARTNER BRANDS
+                  </div>
+                  <div class="about-figure__title splitting-text">80+</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact us -->
+      <section class="p-contact animate-section">
+        <div class="container">
+          <div class="p-contact-wrapper p-contact-bg animate-item">
+            <div class="p-contact-box">
+              <div class="p-contact__title text-uppercase animate-item">
+                CONTACT US
+              </div>
+              <div class="p-contact__form animate-item">
+                <ContactForm />
+              </div>
+
+              <div class="p-contact__social border-top animate-item">
+                <div class="p-contact__social__list">
+                  <a href="###" class="p-contact__social__item">
+                    <img
+                      src="/images/social/facebook.svg"
+                      alt=""
+                      class="p-contact__social__logo"
+                    />
+                  </a>
+                  <a href="###" class="p-contact__social__item">
+                    <img
+                      src="/images/social/ins.svg"
+                      alt=""
+                      class="p-contact__social__logo"
+                    />
+                  </a>
+                  <a href="###" class="p-contact__social__item">
+                    <img
+                      src="/images/social/pin.svg"
+                      alt=""
+                      class="p-contact__social__logo"
+                    />
+                  </a>
+                  <a href="###" class="p-contact__social__item">
+                    <img
+                      src="/images/social/tiktok.svg"
+                      alt=""
+                      class="p-contact__social__logo"
+                    />
+                  </a>
+                  <a href="###" class="p-contact__social__item">
+                    <img
+                      src="/images/social/xiaohongshu.svg"
+                      alt=""
+                      class="p-contact__social__logo"
+                    />
+                  </a>
+                  <a href="###" class="p-contact__social__item">
+                    <img
+                      src="/images/social/mail.svg"
+                      alt=""
+                      class="p-contact__social__logo"
+                    />
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- scroll-text -->
+      <section class="scroll-text animate-section">
+        <div class="string-scroll animate-item">
+          <div class="string-scroll__text">
+              VISUALS THAT REFLECT YOUR VISION •
+              LATINOS CON ORGULLO •
+              BY TORI & ANDREW •
+              DM FOR RATES •
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</Layout>
+
+<style lang="scss">
+  .animate-item {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+
+  .p-contact-bg {
+    background: url(/images/p-about.jpg) no-repeat center center;
+    min-height: 100vh;
+    width: 100%;
+    position: relative;
+  }
+  .light-dot {
+    display: inline-block;
+    margin-right: 4px;
+    height: 14px;
+    width: 14px;
+    background-color: #81f18e;
+    box-shadow: 0 0 4px rgba(129, 241, 142, 0.79);
+    border-radius: 10px;
+  }
+  .about {
+    &-grid {
+      gap: var(--gutter);
+      @media (max-width: 767px) {
+        display: flex;
+        flex-direction: column;
+      }
+    }
+
+    &-content {
+      margin-top: 160px;
+      @media (max-width: 767px) {
+        margin-top: 120px;
+      }
+    }
+    &-figure {
+      position: relative;
+      background-color: var(--color-800);
+      display: block;
+      height: auto;
+      overflow: hidden;
+      aspect-ratio: 3/2;
+      @media (max-width: 767px) {
+        aspect-ratio: 2/1;
+      }
+      &__title {
+        position: absolute;
+        right: 2vw;
+        bottom: 1.5vw;
+        font-size: 6vw;
+        font-weight: 500;
+        display: block;
+        @media (max-width: 1400px) {
+          font-size: 6.5vw;
+        }
+        @media (max-width: 767px) {
+          font-size: 18vw;
+        }
+      }
+      &__note {
+        position: absolute;
+        left: 1.5rem;
+        top: 1.5rem;
+        text-transform: uppercase;
+        font-weight: 400;
+        display: block;
+      }
+    }
+  }
+  section.contact .container:first-child {
+    margin: 12vh auto 6rem;
+    @media (max-width: 576px) {
+      margin: 18vh auto 6rem;
+    }
+  }
+  .page-content {
+    .c-text__content .title {
+      @media (max-width: 576px) {
+        font-size: 32px;
+      }
+    }
+  }
+  .p-contact {
+    position: relative;
+    &-box {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      background: rgba(255, 255, 255, 0.8);
+      max-width: 400px;
+      width: 90%;
+      margin: 16vh auto 200px;
+      padding: 40px 40px;
+      @media (max-width: 576px) {
+        padding: 40px 20px;
+      }
+    }
+    &__title {
+      margin-top: 0.75rem;
+      font-size: 28px;
+      line-height: 1.2;
+      text-align: center;
+    }
+    &__action {
+      margin: 60px auto;
+      text-align: center;
+      width: 100%;
+      .btn {
+        width: 180px;
+        @media (max-width: 576px) {
+          min-height: 42px;
+          .link__value {
+            font-size: 16px;
+          }
+        }
+      }
+    }
+    &__social {
+      margin: 10px auto 0;
+      &__item {
+        padding: 0.5rem 0;
+      }
+      &__list {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        align-items: center;
+        gap: 0 var(--gap);
+        margin-top: var(--margin);
+      }
+      &__logo {
+        width: 32px;
+        height: auto;
+        cursor: pointer;
+        &:hover {
+          opacity: 0.75;
+        }
+      }
+    }
+    &__form {
+      margin-bottom: 2rem;
+    }
+  }
+</style>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+  import Splitting from "splitting";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  function initPageAnimations() {
+    const topElements = document.querySelectorAll(
+      ".animate-section:first-child .animate-item"
+    );
+    gsap.to(topElements, {
+      opacity: 1,
+      y: 0,
+      duration: 1,
+      stagger: 0.2,
+      ease: "power2.out",
+    });
+    document.querySelectorAll(".animate-section:not(:first-child)").forEach((section) => {
+        const items = section.querySelectorAll(".animate-item");
+        gsap.to(items, {
+          opacity: 1,
+          y: 0,
+          duration: 1,
+          stagger: 0.2,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: section,
+            start: "top 80%",
+            toggleActions: "play none none none",
+          },
+        });
+    });
+  }
+
+  document.addEventListener("astro:page-load", () => {
+     if (document.querySelector(".animate-item")) {
+      initPageAnimations();
+    }
+    if (document.querySelector(".splitting-text")) {
+      const splittingTexts = document.querySelectorAll(".splitting-text");
+      splittingTexts.forEach((text) => {
+        Splitting({ target: text, by: "chars" });
+        const chars = text.querySelectorAll(".char");
+
+        gsap.fromTo(
+          chars,
+          { opacity: 0, y: 40 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            stagger: 0.04,
+            ease: "power1.out",
+            scrollTrigger: {
+              trigger: text.closest(".splitting-text-trigger"),
+              start: "top 80%",
+            },
+          }
+        );
+      });
+    }
+  });
+</script>

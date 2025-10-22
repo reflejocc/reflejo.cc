@@ -1,0 +1,179 @@
+<section class="about c-about">
+  <div class="container about-container">
+    <div class="section-body">
+      <div class="about-inner">
+        <div class="c-text">
+          <div class="c-text-inner col-12 col-sm-10 col-md-8 col-lg-6 ml-auto">
+            <div class="c-text__content col-12 col-lg-10 p-0">
+              <h3 class="title m">
+                Creating visuals that reflect your story.
+              </h3>
+              <p class="s">
+                  <strong>REFLEJO</strong> is a creative cooperative founded in 2019,
+                    specializing in photography, videography, and related visual services.
+                    Dedicated to delivering high-quality, concept-driven work, Reflejo has
+                    steadily grown into a collaborative hub for visual storytelling. The
+                    co-op partners with a wide range of brands, artists, and communities,
+                    working closely with each client to craft authentic imagery and help them
+                    realize their creative goals.
+              </p>
+            </div>
+            <a href="/contact" class="c-text__link cta link-underlined">
+              <img
+                src="/images/icon/arrow.svg"
+                alt=""
+                class="icon--s icon--left c-text__link--arrow"
+              />
+              <span>Contact Us</span>
+            </a>
+          </div>
+        </div>
+        <div class="about-content about-grid grid splitting-text-trigger">
+          {[
+            { note: "Since", title: "2019" },
+            { note: "IDEAS BROUGHT TO LIFE", title: "200+" },
+            { note: "BRANDS", title: "10+" },
+          ].map((item) => (
+            <div class="about-figure grid__col-4">
+              <div class="about-figure__note s">
+                <div class="light-dot"></div>
+                {item.note}
+              </div>
+              <div class="about-figure__title splitting-text">{item.title}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style lang="scss">
+  .light-dot {
+    display: inline-block;
+    margin-right: 4px;
+    height: 14px;
+    width: 14px;
+    background-color: #81f18e;
+    box-shadow: 0 0 4px rgba(129, 241, 142, 0.79);
+    border-radius: 10px;
+  }
+  .about {
+    &-grid {
+      gap: var(--gutter);
+      @media (max-width: 767px) {
+        display: flex;
+        flex-direction: column;
+      }
+    }
+
+    &-content {
+      margin-top: 160px;
+      @media (max-width: 767px) {
+        margin-top: 120px;
+      }
+    }
+    &-figure {
+      position: relative;
+      background-color: var(--color-800);
+      display: block;
+      height: auto;
+      overflow: hidden;
+      aspect-ratio: 3/2;
+      @media (max-width: 767px) {
+        aspect-ratio: 2/1;
+      }
+      &__title {
+        position: absolute;
+        right: 2vw;
+        bottom: 1.5vw;
+        font-size: 6vw;
+        font-weight: 500;
+        display: block;
+        @media (max-width: 1400px) {
+          font-size: 6.5vw;
+        }
+        @media (max-width: 767px) {
+          font-size: 18vw;
+        }
+      }
+      &__note {
+        position: absolute;
+        left: 1.5rem;
+        top: 1.5rem;
+        text-transform: uppercase;
+        font-weight: 400;
+        display: block;
+      }
+    }
+  }
+</style>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+  gsap.registerPlugin(ScrollTrigger);
+
+  document.addEventListener("astro:page-load", () => {
+    if(document.querySelector(".c-about")){
+      const animations = [
+        {
+          element: ".about .c-text__content .title",
+          options: { y: 80, opacity: 0 },
+          to: { y: 0, opacity: 1, duration: 1.5, ease: "Power1.out" },
+          trigger: ".about .c-text",
+          start: "top 80%",
+        },
+        {
+          element: ".about .c-text__content p",
+          options: { y: 80, opacity: 0 },
+          to: { y: 0, opacity: 1, duration: 1.5, ease: "Power1.out", delay: 0.4 },
+          trigger: ".about .c-text",
+          start: "top 80%",
+        },
+        {
+          element: ".about .c-text__link",
+          options: { y: 40, opacity: 0 },
+          to: { y: 0, opacity: 1, duration: 1, ease: "Power1.out", delay: 0.8 },
+          trigger: ".about .c-text",
+          start: "top 80%",
+        },
+      ];
+      animations.forEach(({ element, options, to, trigger, start }) => {
+        gsap.fromTo(
+          element,
+          options,
+          {
+            ...to,
+            scrollTrigger: {
+              trigger,
+              start,
+            },
+          }
+        );
+      });
+    }
+    function homeAboutAnimation(element) {
+      gsap.fromTo(
+        element,
+        { y: 120, opacity: 0 },
+        {
+          y: 0,
+          duration: 1.5,
+          opacity: 1,
+          ease: "Power1.out",
+          scrollTrigger: {
+            trigger: element.closest(".about-content"),
+            start: "top 80%",
+            end: "bottom center",
+          },
+        }
+      );
+    }
+
+    if(document.querySelector(".c-about")){
+        document.querySelectorAll(".about-figure").forEach(homeAboutAnimation);
+    }
+
+  });
+</script>

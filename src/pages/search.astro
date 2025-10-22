@@ -1,0 +1,594 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import GalleryItem from "../components/section/GalleryItem.astro";
+import { modelsTDK } from "../config/seoTdk";
+import modelsData from "../data/models.json";
+
+const { models } = modelsData;
+
+const url = new URL(Astro.request.url);
+const searchQuery = url.searchParams.get("q") || "";
+---
+
+<Layout
+  title={"Search Models - " + (modelsTDK.title || "")}
+  description={"Search for models in our database - " +
+    (modelsTDK.description || "")}
+  keywords={modelsTDK.keywords || ""}
+>
+  <div class="main">
+    <div class="page-content">
+      <section class="search-section">
+        <div class="container search-container">
+          <div class="search-header animate-fadeInUp" id="search-header">
+            <h1 class="search-title">Find Models</h1>
+            <p class="search-subtitle">
+              Search by name, location or other details
+            </p>
+
+            <!-- Enhanced Search Box -->
+            <div class="search-box-wrapper">
+              <div class="search-box">
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  stroke="currentColor"
+                  class="search-icon"
+                >
+                  <path
+                    d="M7.33333 12.6667C10.2789 12.6667 12.6667 10.2789 12.6667 7.33333C12.6667 4.38781 10.2789 2 7.33333 2C4.38781 2 2 4.38781 2 7.33333C2 10.2789 4.38781 12.6667 7.33333 12.6667Z"
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"></path>
+                  <path
+                    d="M14 14.0001L11.1 11.1001"
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"></path>
+                </svg>
+                <input
+                  type="text"
+                  id="search-input"
+                  class="search-input"
+                  placeholder="Type to search models..."
+                  value={searchQuery}
+                />
+                <button
+                  id="clear-search"
+                  class="clear-search"
+                  style="display: none;"
+                >
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M18 6L6 18"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"></path>
+                    <path
+                      d="M6 6L18 18"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Results Area (Initially Hidden) -->
+          <div
+            class="search-results-area"
+            id="search-results-area"
+            style="display: none;"
+          >
+            <!-- Filter Options -->
+            <div class="filter-options" id="filter-options">
+              <div class="gallery-filter">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="female">Female</button>
+                <button class="filter-btn" data-filter="male">Male</button>
+                <button class="filter-btn" data-filter="other">Other</button>
+              </div>
+            </div>
+
+            <!-- Results Count -->
+            <div class="gallery-results" id="gallery-results">
+              Showing <span id="results-count">0</span> models
+            </div>
+
+            <!-- Results Grid -->
+            <div class="gallery-inner">
+              <div class="gallery-list" id="gallery-grid">
+                {models.map((model) => <GalleryItem model={model} />)}
+              </div>
+            </div>
+          </div>
+
+          <!-- Empty State (Initially Shown) -->
+          <div class="empty-state animate-fadeInUp animate-delay-350" id="empty-state">
+            <!-- <img src="/images/icon/search-illustration.svg" alt="Search" class="empty-state-icon" /> -->
+            <p class="empty-state-text">Start typing to search for models</p>
+          </div>
+
+          <!-- No Results State (Initially Hidden) -->
+          <div
+            class="no-results-state"
+            id="no-results-state"
+            style="display: none;"
+          >
+            <!-- <img src="/images/icon/no-results.svg" alt="No results" class="empty-state-icon" /> -->
+            <p class="empty-state-text">No models found matching your search</p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</Layout>
+
+<script>
+  import { gsap } from "gsap";
+  document.addEventListener("astro:page-load", () => {
+    // DOM Elements
+    const searchInput = document.getElementById(
+      "search-input"
+    ) as HTMLInputElement;
+    const clearSearchBtn = document.getElementById("clear-search");
+    const searchResultsArea = document.getElementById("search-results-area");
+    const emptyState = document.getElementById("empty-state");
+    const noResultsState = document.getElementById("no-results-state");
+    const galleryItems = document.querySelectorAll(".gallery-item");
+    const resultsCount = document.getElementById("results-count");
+    const filterBtns = document.querySelectorAll(".filter-btn");
+    const filterOptions = document.getElementById("filter-options");
+    const galleryResults = document.getElementById("gallery-results");
+    const searchHeader = document.getElementById("search-header");
+
+    // State
+    let currentFilter = "all";
+    let currentSearch = "";
+
+    // Check if there's an initial search query from URL
+    if (searchInput && searchInput.value) {
+      currentSearch = searchInput.value;
+      showSearchResults();
+    }
+
+    // Animation Functions
+
+    function animateFilters() {
+      if (!filterOptions || !galleryResults) return;
+
+      gsap.fromTo(
+        [filterOptions, galleryResults],
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.6, stagger: 0.1, ease: "power2.out" }
+      );
+    }
+
+    function animateItems(items: NodeListOf<Element> | Element[]) {
+      if (!items || items.length === 0) return;
+
+      gsap.fromTo(
+        items,
+        { opacity: 0, y: 40 },
+        { opacity: 1, y: 0, stagger: 0.05, duration: 0.4, ease: "power2.out" }
+      );
+    }
+
+    function animateEmptyState() {
+      if (!emptyState) return;
+
+      gsap.fromTo(
+        emptyState,
+        { opacity: 0, scale: 0.95 },
+        { opacity: 1, scale: 1, duration: 0.6, ease: "back.out(1.2)" }
+      );
+    }
+
+    function animateNoResults() {
+      if (!noResultsState) return;
+
+      gsap.fromTo(
+        noResultsState,
+        { opacity: 0, scale: 0.95 },
+        { opacity: 1, scale: 1, duration: 0.6, ease: "back.out(1.2)" }
+      );
+    }
+
+    // Show/Hide Functions
+    function showSearchResults() {
+      if (searchResultsArea) searchResultsArea.style.display = "block";
+      if (emptyState) emptyState.style.display = "none";
+      if (noResultsState) noResultsState.style.display = "none";
+      if (clearSearchBtn) clearSearchBtn.style.display = "block";
+
+      updateDisplay();
+      animateFilters();
+    }
+
+    function showEmptyState() {
+      if (searchResultsArea) searchResultsArea.style.display = "none";
+      if (emptyState) emptyState.style.display = "flex";
+      if (noResultsState) noResultsState.style.display = "none";
+      if (clearSearchBtn) clearSearchBtn.style.display = "none";
+
+      animateEmptyState();
+    }
+
+    function showNoResults() {
+      if (searchResultsArea) searchResultsArea.style.display = "none";
+      if (emptyState) emptyState.style.display = "none";
+      if (noResultsState) noResultsState.style.display = "flex";
+      if (clearSearchBtn) clearSearchBtn.style.display = "block";
+
+      animateNoResults();
+    }
+
+    // Filter & Search Logic
+    function updateDisplay() {
+      const filteredItems = Array.from(galleryItems).filter((item) => {
+        const htmlItem = item as HTMLElement;
+        const category = htmlItem.dataset.category || "";
+        const name = (htmlItem.dataset.name || "").toLowerCase();
+        const location = (htmlItem.dataset.location || "").toLowerCase();
+        const photographer = (
+          htmlItem.dataset.photographer || ""
+        ).toLowerCase();
+
+        const matchesFilter =
+          currentFilter === "all" || category === currentFilter;
+        const matchesSearch =
+          currentSearch === "" ||
+          name.includes(currentSearch.toLowerCase()) ||
+          location.includes(currentSearch.toLowerCase()) ||
+          photographer.includes(currentSearch.toLowerCase());
+
+        return matchesFilter && matchesSearch;
+      });
+
+      if (resultsCount)
+        resultsCount.textContent = filteredItems.length.toString();
+
+      galleryItems.forEach((item) => {
+        (item as HTMLElement).style.display = "none";
+      });
+
+      filteredItems.forEach((item) => {
+        (item as HTMLElement).style.display = "block";
+      });
+
+      // Handle no results
+      if (filteredItems.length === 0 && currentSearch !== "") {
+        showNoResults();
+      } else {
+        animateItems(filteredItems);
+      }
+    }
+
+    // Event Listeners
+    if (searchInput) {
+      searchInput.addEventListener("input", (e) => {
+        const target = e.target as HTMLInputElement;
+        currentSearch = target.value.trim();
+
+        if (currentSearch === "") {
+          showEmptyState();
+        } else {
+          showSearchResults();
+        }
+
+        // Update URL without reloading
+        const url = new URL(window.location.href);
+        if (currentSearch) {
+          url.searchParams.set("q", currentSearch);
+        } else {
+          url.searchParams.delete("q");
+        }
+        history.pushState({}, "", url.toString());
+      });
+
+      // Focus the search input on page load
+      setTimeout(() => {
+        searchInput.focus();
+      }, 500);
+    }
+
+    if (clearSearchBtn) {
+      clearSearchBtn.addEventListener("click", () => {
+        if (searchInput) searchInput.value = "";
+        currentSearch = "";
+        showEmptyState();
+
+        const url = new URL(window.location.href);
+        url.searchParams.delete("q");
+        history.pushState({}, "", url.toString());
+
+        if (searchInput) searchInput.focus();
+      });
+    }
+
+
+    filterBtns.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        filterBtns.forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+        currentFilter = (btn as HTMLElement).dataset.filter || "all";
+        updateDisplay();
+      });
+    });
+
+
+    if (currentSearch) {
+      showSearchResults();
+    } else {
+      animateEmptyState();
+    }
+  });
+</script>
+
+<style lang="scss">
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fadeInUp {
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-out forwards;
+  }
+  .animate-delay-350{
+    animation-delay: 0.35s;
+  }
+  @media (min-width: 767px) {
+    section .container:first-child {
+      margin: 0 auto;
+    }
+  }
+
+  .search-section {
+    padding: 4rem 0;
+    min-height: 70vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .search-container {
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+
+  .search-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .search-title {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+  }
+
+  .search-subtitle {
+    color: var(--color-300);
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+  }
+
+  .search-box-wrapper {
+    max-width: 520px;
+    margin: 0 auto;
+  }
+
+  .search-box {
+    display: flex;
+    align-items: center;
+    padding: .5rem 1.5rem;
+    border: 1px solid var(--color-500);
+    border-radius: 10rem;
+    background: rgba(255, 255, 255, 0.05);
+    transition: all 0.3s;
+    position: relative;
+    height: 60px;
+
+    &:focus-within {
+      border-color: var(--color-100);
+      box-shadow: 0 0 0 3px rgba(var(--color-primary-rgb), 0.1);
+    }
+
+    .search-icon {
+      margin-right: 1rem;
+      color: var(--color-300);
+      width: 24px;
+      height: 24px;
+    }
+
+    .search-input {
+      flex: 1;
+      border: none;
+      background: transparent;
+      font-size: 1.2rem;
+      color: var(--color-100);
+      outline: none;
+      padding: 0;
+
+      &::placeholder {
+        color: var(--color-300);
+      }
+      &::-webkit-search-cancel-button {
+        -webkit-appearance: none;
+        display: none;
+      }
+    }
+
+    .clear-search {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--color-300);
+      padding: 0.5rem;
+      margin-right: -0.5rem;
+      border-radius: 50%;
+      transition: all 0.2s;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.1);
+        color: var(--color-100);
+      }
+    }
+  }
+
+  .filter-options {
+    margin-bottom: 2rem;
+    opacity: 0;
+  }
+
+  .gallery-filter {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .filter-btn {
+    padding: 0.5rem 1.5rem;
+    border: 1px solid var(--color-500);
+    border-radius: 4rem;
+    background: transparent;
+    color: var(--color-100);
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 1rem;
+    text-decoration: none;
+
+    &:hover {
+      background: rgba(var(--color-primary-rgb), 0.1);
+    }
+
+    &.active {
+      background: var(--color-100);
+      color: white;
+      border-color: var(--color-100);
+    }
+  }
+
+  .gallery-results {
+    text-align: left;
+    margin-bottom: 2rem;
+    font-size: 0.875rem;
+    color: var(--color-300);
+    opacity: 0;
+  }
+
+  .gallery-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    min-height: 200px;
+    position: relative;
+
+    @media (min-width: 576px) {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+
+    @media (min-width: 768px) {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.75rem;
+    }
+
+    @media (min-width: 1280px) {
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+    }
+  }
+
+  .empty-state,
+  .no-results-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 0;
+    text-align: center;
+
+    .empty-state-icon {
+      width: 120px;
+      height: 120px;
+      margin-bottom: 2rem;
+      opacity: 0.7;
+    }
+
+    .empty-state-text {
+      font-size: 1rem;
+      color: var(--color-300);
+      margin-bottom: 1.5rem;
+    }
+
+    .reset-search-btn {
+      padding: 0.75rem 1.5rem;
+      border: 1px solid var(--color-500);
+      border-radius: 2rem;
+      background: transparent;
+      color: var(--color-100);
+      cursor: pointer;
+      transition: all 0.3s;
+      font-size: 1rem;
+
+      &:hover {
+        background: var(--color-100);
+        color: white;
+        border-color: var(--color-100);
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    .search-section {
+      padding: 2rem 0;
+    }
+
+    .search-title {
+      font-size: 2rem;
+    }
+
+    .search-subtitle {
+      font-size: 1rem;
+    }
+
+    .search-box {
+      padding: 1rem 1.2rem;
+
+      .search-input {
+        font-size: 1rem;
+      }
+    }
+
+    .filter-btn {
+      padding: 0.4rem 1rem;
+      font-size: 0.8rem;
+    }
+
+    .empty-state-icon {
+      width: 80px;
+      height: 80px;
+    }
+  }
+</style>

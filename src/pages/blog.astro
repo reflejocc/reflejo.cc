@@ -1,0 +1,47 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "@/layouts/Layout.astro";
+import NewsItem from "@/components/section/NewsItem.astro";
+import { blogTDK } from "../config/seoTdk";
+
+const posts = (await getCollection("blog")).sort(
+  (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf()
+);
+---
+
+<Layout
+  title={blogTDK.title || ""}
+  description={blogTDK.description || ""}
+  keywords={blogTDK.keywords || ""}
+>
+  <main class="blog-wrapper blog">
+    <section class="news">
+      <div class="container news-container">
+        <div class="news-overview">
+          <div class="news-wrapper">
+            <div class="news-list row">
+              {posts.map((post) => <NewsItem post={post} />)}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<style lang="scss">
+  .news {
+    .container:first-child {
+      margin: 4rem auto;
+      @media (max-width: 767px) {
+        margin: 80px auto;
+      }
+    }
+    &-inner {
+      padding-left: var(--pad-inner);
+    }
+    &-list {
+      align-items: flex-start;
+    }
+  }
+</style>

@@ -1,0 +1,331 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import GalleryItem from "../components/section/GalleryItem.astro";
+import { modelsTDK } from "../config/seoTdk";
+import modelsData from "../data/models.json";
+const { models } = modelsData;
+const url = new URL(Astro.request.url);
+const filterParam = url.searchParams.get("filter") || "all";
+---
+
+<Layout
+  title={modelsTDK.title || ""}
+  description={modelsTDK.description || ""}
+  keywords={modelsTDK.keywords || ""}
+>
+  <div class="main p-models">
+    <div class="page-content">
+      <section class="gallery">
+        <div class="container gallery-container">
+          <div class="toolkit" id="models-toolkit">
+            <!-- Filter -->
+            <div class="gallery-filter">
+              <button
+                class={`filter-btn ${filterParam === "all" ? "active" : ""}`}
+                data-filter="all">All</button
+              >
+              <button
+                class={`filter-btn ${filterParam === "events" ? "active" : ""}`}
+                data-filter="events">Events</button
+              >
+              <button
+                class={`filter-btn ${filterParam === "portraits" ? "active" : ""}`}
+                data-filter="portraits">Portraits</button
+              >
+              <button
+                class={`filter-btn ${filterParam === "commercial" ? "active" : ""}`}
+                data-filter="commercial">Commercial</button
+              >
+              <button
+                class={`filter-btn ${filterParam === "editorial" ? "active" : ""}`}
+                data-filter="editorial">Editorial</button
+              >
+            </div>
+            <!-- Search -->
+            <div class="search-container">
+              <div class="search-box">
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  stroke="currentColor"
+                  class="search-icon"
+                >
+                  <path
+                    d="M7.33333 12.6667C10.2789 12.6667 12.6667 10.2789 12.6667 7.33333C12.6667 4.38781 10.2789 2 7.33333 2C4.38781 2 2 4.38781 2 7.33333C2 10.2789 4.38781 12.6667 7.33333 12.6667Z"
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"></path>
+                  <path
+                    d="M14 14.0001L11.1 11.1001"
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"></path>
+                </svg>
+                <input
+                  type="search"
+                  id="model-search"
+                  class="search-input"
+                  placeholder="Search services..."
+                />
+              </div>
+            </div>
+          </div>
+          <!-- Result -->
+          <div class="gallery-results" id="gallery-results">
+            Showing <span id="results-count">{models.length}</span> services
+          </div>
+          <!-- Models -->
+          <div class="gallery-inner">
+            <div class="gallery-list" id="gallery-grid">
+              {models.map((model) => <GalleryItem model={model} />)}
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</Layout>
+
+<script>
+  import { gsap } from "gsap";
+
+  document.addEventListener("astro:page-load", () => {
+
+    const galleryItems = document.querySelectorAll(".gallery-item");
+    const resultsCount = document.getElementById("results-count");
+    const filterBtns = document.querySelectorAll(".filter-btn");
+    const searchInput = document.getElementById(
+      "model-search"
+    ) as HTMLInputElement;
+    const toolkit = document.getElementById("models-toolkit");
+    const results = document.getElementById("gallery-results");
+    let currentFilter = "all";
+    let currentSearch = "";
+
+    if (!resultsCount || !toolkit || !results) {
+      // console.log("Required elements not found");
+      return;
+    }
+
+    function animateToolkit() {
+      gsap.fromTo(
+        toolkit,
+        { opacity: 0, y: -30 },
+        { opacity: 1, y: 0, duration: 1, delay: 0.2, ease: "power2.out" }
+      );
+      gsap.fromTo(
+        results,
+        { opacity: 0, y: 15 },
+        { opacity: 1, y: 0, duration: 0.8, delay: 0.4, ease: "power2.out" }
+      );
+    }
+
+    function animateItems(items: NodeListOf<Element> | Element[]) {
+      gsap.fromTo(
+        items,
+        { opacity: 0, y: 40 },
+        { opacity: 1, y: 0, stagger: 0.05, duration: 0.4, ease: "power2.out" }
+      );
+    }
+
+    function updateDisplay() {
+      const filteredItems = Array.from(galleryItems).filter((item) => {
+        const gender = (item as HTMLElement).dataset.gender || "";
+        const name = ((item as HTMLElement).dataset.name || "").toLowerCase();
+        const matchesFilter =
+          currentFilter === "all" || gender === currentFilter;
+        const matchesSearch =
+          currentSearch === "" || name.includes(currentSearch.toLowerCase());
+        return matchesFilter && matchesSearch;
+      });
+
+      resultsCount.textContent = filteredItems.length.toString();
+
+      galleryItems.forEach((item) => {
+        (item as HTMLElement).style.display = "none";
+      });
+
+      filteredItems.forEach((item) => {
+        (item as HTMLElement).style.display = "block";
+      });
+
+      animateItems(filteredItems);
+
+      const galleryGrid = document.getElementById("gallery-grid");
+      if (galleryGrid) {
+        if (filteredItems.length === 0) {
+          galleryGrid.classList.add("no-results");
+        } else {
+          galleryGrid.classList.remove("no-results");
+        }
+      }
+    }
+    if (document.querySelector(".p-models")) {
+        filterBtns.forEach((btn) => {
+          btn.addEventListener("click", () => {
+            filterBtns.forEach((b) => b.classList.remove("active"));
+            btn.classList.add("active");
+            currentFilter = (btn as HTMLElement).dataset.filter || "all";
+            updateDisplay();
+          });
+        });
+
+        if (searchInput) {
+          searchInput.addEventListener("input", () => {
+            currentSearch = searchInput.value;
+            updateDisplay();
+          });
+        }
+        animateToolkit();
+        setTimeout(() => {
+          animateItems(galleryItems);
+          updateDisplay();
+        }, 300);
+    }
+  });
+</script>
+
+<style lang="scss">
+  section .container:first-child {
+    padding: 2rem 0;
+    margin-top: 4rem;
+  }
+  .toolkit {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    opacity: 0;
+  }
+  .search-container {
+    margin-bottom: 2rem;
+  }
+
+  .search-box {
+    display: flex;
+    align-items: center;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 1rem 1.5rem;
+    border: 1px solid var(--color-500);
+    border-radius: 10rem;
+    background: rgba(255, 255, 255, 0.05);
+
+    .search-icon {
+      margin-right: 0.75rem;
+      color: var(--color-300);
+    }
+
+    .search-input {
+      flex: 1;
+      border: none;
+      background: transparent;
+      font-size: 1rem;
+      color: var(--color-text);
+      outline: none;
+
+      &::placeholder {
+        color: var(--color-300);
+      }
+    }
+  }
+
+  .gallery-filter {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .filter-btn {
+    padding: 0.5rem 1.5rem;
+    border: 1px solid var(--color-500);
+    border-radius: 2rem;
+    background: transparent;
+    color: var(--color-100);
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 0.85rem;
+    text-decoration: none;
+
+    &:hover {
+      background: rgba(var(--color-primary-rgb), 0.1);
+    }
+
+    &.active {
+      background: var(--color-100);
+      color: white;
+      border-color: var(--color-100);
+    }
+  }
+
+  .gallery-results {
+    text-align: left;
+    margin-bottom: 2rem;
+    font-size: 0.875rem;
+    color: var(--color-300);
+    opacity: 0;
+  }
+
+  .gallery-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    min-height: 200px;
+    position: relative;
+
+    @media (min-width: 576px) {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+
+    @media (min-width: 768px) {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.75rem;
+    }
+
+    @media (min-width: 1280px) {
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+    }
+
+    &.no-results::after {
+      content: "No matches found";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: var(--color-300);
+      font-size: 1.1rem;
+      width: 100%;
+      text-align: center;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .toolkit {
+      flex-direction: column;
+      flex-direction: column-reverse;
+      margin-bottom: 2.5rem;
+    }
+
+    .gallery-filter {
+      margin-bottom: 0;
+    }
+
+    .search-container {
+      width: 100%;
+    }
+
+    .filter-btn {
+      padding: 0.4rem 1rem;
+      font-size: 1rem;
+    }
+  }
+</style>

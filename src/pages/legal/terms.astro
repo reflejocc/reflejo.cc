@@ -1,0 +1,104 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { termsTDK } from "../../config/seoTdk";
+---
+
+<Layout
+  title={termsTDK.title || ""}
+  description={termsTDK.description || ""}
+  keywords={termsTDK.keywords || ""}
+>
+  <div class="page-contact no-scroll">
+    <div class="page-content">
+      <!-- Terms -->
+      <section class="terms">
+        <div class="container">
+          <div class="section-body">
+            <div class="col-12 m-auto">
+              <h1 class="title l">Terms of Use</h1>
+
+              <p><strong>Last updated:</strong> October 2025</p>
+
+              <h2>Acceptance of Terms</h2>
+              <p>
+                By accessing and using the REFLEJO website or engaging with our photography and video services, you agree to comply
+                with these Terms of Use. This includes any inquiries, bookings, or collaborations made through our website,
+                social media platforms, or direct communication channels. If you do not agree with any part of these terms,
+                please do not use this website or our services.
+              </p>
+
+              <h2>Use of Content</h2>
+              <p>
+                All images, videos, designs, and written content on this website are the property of Reflejo and are 
+                protected under copyright law. You may not reproduce, copy, distribute, or modify any material 
+                without prior written consent from REFLEJO.
+              </p>
+
+              <h2>Intellectual Property</h2>
+              <p>
+                The REFLEJO name, logo, and creative works are trademarks and intellectual property of REFLEJO LLC. 
+                Unauthorized use is strictly prohibited.
+              </p>
+
+              <h2>Third-Party Links</h2>
+              <p>
+                This website may include links to external platforms such as Instagram, TikTok, or YouTube. 
+                Reflejo is not responsible for the content or privacy practices of those third-party sites. 
+                We encourage visitors to review their policies when interacting with our profiles there.
+              </p>
+
+              <h2>Promotional Use</h2>
+              <p>
+                By agreeing to collaborate or contract with REFLEJO for photography or video services, you grant REFLEJO the right to use
+                the materials produced — including images, videos, and related content — for portfolio display, promotional use, and
+                publication on REFLEJO’s website and social media platforms, unless otherwise agreed in writing.
+              </p>
+
+              <h2>Limitation of Liability</h2>
+              <p>
+                REFLEJO shall not be held liable for any indirect, incidental, or consequential damages arising 
+                from the use of this website or its content. All materials are provided on an "as-is" basis, 
+                without warranties of any kind.
+              </p>
+
+              <h2>Governing Law</h2>
+              <p>
+                These Terms shall be governed by and interpreted according to the laws of Texas and New York, USA. 
+                Any disputes arising from the use of this site shall fall under the jurisdiction of the courts located in Texas or New York.
+              </p>
+
+              <h2>Changes to Terms</h2>
+              <p>
+                REFLEJO reserves the right to update or modify these Terms at any time without prior notice. 
+                Continued use of the website after updates constitutes acceptance of the new Terms.
+              </p>
+
+              <h2>Contact</h2>
+              <p>
+                For questions regarding these Terms of Use, please contact us at 
+                <a href="mailto:hi@reflejo.cc">hi@reflejo.cc</a>.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  h1 {
+    margin: 1.5rem 0 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--color-600);
+  }
+  h2 {
+    margin: 1.25rem 0 0.75rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+  p {
+    margin: 0.75rem 0 1rem;
+    line-height: 1.8;
+  }
+</style>
