@@ -220,6 +220,20 @@ export const navConfig = {
       display: none;
     }
   }
+
+  .header-logo img {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 60px; /* limits logo height but allows full width scaling */
+    object-fit: contain;
+  }
+
+  @media (max-width: 767px) {
+    .header-logo img {
+      max-height: 50px;
+    }
+  }
 </style>
 
 <script>
