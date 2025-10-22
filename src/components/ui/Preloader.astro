@@ -106,26 +106,6 @@
   }
 
   #preloader {
-    height: calc(100vh + env(safe-area-inset-bottom));
-  }
-
-  @supports (-webkit-touch-callout: none) {
-    /* Safari 26 translucent toolbar workaround */
-    #preloader::before {
-      content: "";
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      display: block;
-      width: 100vw;
-      height: 48px; /* must be <50vh */
-      z-index: -1; /* keep it behind animation */
-    }
-
-    #preloader::before div {
-      background-color: var(--bg);
-      height: 100vh;
-    }
+    height: 110vh;
   }
 </style>
