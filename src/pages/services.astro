@@ -25,12 +25,8 @@ const filterParam = url.searchParams.get("filter") || "all";
                 data-filter="all">All</button
               >
               <button
-                class={`filter-btn ${filterParam === "events" ? "active" : ""}`}
-                data-filter="events">Events</button
-              >
-              <button
-                class={`filter-btn ${filterParam === "portraits" ? "active" : ""}`}
-                data-filter="portraits">Portraits</button
+                class={`filter-btn ${filterParam === "branding" ? "active" : ""}`}
+                data-filter="branding">Branding</button
               >
               <button
                 class={`filter-btn ${filterParam === "commercial" ? "active" : ""}`}
@@ -39,6 +35,10 @@ const filterParam = url.searchParams.get("filter") || "all";
               <button
                 class={`filter-btn ${filterParam === "editorial" ? "active" : ""}`}
                 data-filter="editorial">Editorial</button
+              >
+              <button
+                class={`filter-btn ${filterParam === "lifestyle" ? "active" : ""}`}
+                data-filter="lifestyle">Lifestyle</button
               >
             </div>
             <!-- Search -->

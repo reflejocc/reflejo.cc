@@ -1,10 +1,10 @@
 export const homeTDK = {
-  title: "Welcome LuonModels",
+  title: "REFLEJO",
   description: "",
   keywords: "",
 };
 export const modelsTDK = {
-  title: "Moldels",
+  title: "Services",
   description: "",
   keywords: "",
 };
@@ -16,7 +16,7 @@ export const blogTDK = {
 };
 
 export const joinUsTDK = {
-  title: "Join Us",
+  title: "Contact Us",
   description: "",
   keywords: "",
 };
