@@ -110,7 +110,7 @@ const searchQuery = url.searchParams.get("q") || "";
             <!-- Results Grid -->
             <div class="gallery-inner">
               <div class="gallery-list" id="gallery-grid">
-                {models.map((model) => <GalleryItem model={model} />)}
+                {models.map((model) => <GalleryItem model={model as any} />)}
               </div>
             </div>
           </div>

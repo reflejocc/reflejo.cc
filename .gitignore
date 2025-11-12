@@ -1,0 +1,14 @@
+dist/
+.astro/
+node_modules/
+.env
+.env.local
+.env.*.local
+.DS_Store
+Thumbs.db
+npm-debug.log*
+.vscode/
+.idea/
+*.swp
+pnpm-lock.yaml
+yarn.lock

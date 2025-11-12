@@ -4,6 +4,28 @@ import GalleryItem from "../components/section/GalleryItem.astro";
 import { modelsTDK } from "../config/seoTdk";
 import modelsData from "../data/models.json";
 const { models } = modelsData;
+
+const stripEmptyKeys = (obj) => Object.fromEntries(
+  Object.entries(obj ?? {}).filter(([k]) => k && k.trim())
+);
+
+const sanitizeModel = (m) => {
+  const info = stripEmptyKeys(m.info);
+  // If GalleryItem needs measurements, uncomment the next line
+  // const measurements = stripEmptyKeys(m.measurements);
+  return {
+    id: m.id,
+    name: m.name,
+    image: m.image,
+    date: m.date,
+    category: m.category,
+    info,
+    // measurements,
+    description: m.description ?? "",
+    featured: !!m.featured,
+    gallery: Array.isArray(m.gallery) ? m.gallery : [],
+  };
+};
 const url = new URL(Astro.request.url);
 const filterParam = url.searchParams.get("filter") || "all";
 ---
@@ -80,7 +102,7 @@ const filterParam = url.searchParams.get("filter") || "all";
           <!-- Models -->
           <div class="gallery-inner">
             <div class="gallery-list" id="gallery-grid">
-              {models.map((model) => <GalleryItem model={model} />)}
+              {models.map((model) => <GalleryItem model={sanitizeModel(model)} />)}
             </div>
           </div>
         </div>
