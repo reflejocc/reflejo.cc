@@ -1,7 +1,7 @@
 ---
 import Layout from '@/layouts/Layout.astro';
 import { homeTDK } from '../config/seoTdk';
-// import Hero from '@/components/section/Hero.astro';
+import Hero from '@/components/section/Hero.astro';
 import News from '@/components/section/News.astro';
 import Marquee from '@/components/section/Marquee.astro';
 // import LatestBlog from '@/components/section/LatestBlog.astro';
@@ -17,7 +17,7 @@ keywords = {homeTDK.keywords  || ''}
 >
 <div class="index" >
 	<Preloader />
-	<!-- <Hero/> -->
+	<Hero/>
 	<About />
 	<Marquee />
 	<!-- <News /> -->
