@@ -86,12 +86,15 @@ const posts = (await getCollection("blog"))
 <script>
   import { gsap } from "gsap";
   import { ScrollTrigger } from "gsap/ScrollTrigger";
-  import Swiper from 'swiper/bundle';
-  import 'swiper/css/bundle';
+  import Swiper from "swiper";
+  import { Navigation } from "swiper/modules";
+  import "swiper/css";
+  import "swiper/css/navigation";
   gsap.registerPlugin(ScrollTrigger);
 
   document.addEventListener("astro:page-load", () => {
     new Swiper(".articleSwiper", {
+      modules: [Navigation],
       navigation: {
         nextEl: ".article-swiper-next",
         prevEl: ".article-swiper-prev",
